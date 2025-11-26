@@ -299,6 +299,9 @@
             }
         }
     </style>
+
+    <!-- PDF Generation Script -->
+    <script src="../js/pdf-api-client.js"></script>
 </head>
 
 <body class="page-template-default page theme-paroti">
@@ -437,14 +440,10 @@
 
                     <!-- Action Buttons -->
                     <div class="action-buttons">
-                        <a href="#" id="receiptBtn" class="btn-primary" onclick="generateReceipt(event)">
-                            <i class="fas fa-receipt"></i>
-                            Générer le reçu
-                        </a>
-                        <a href="#" class="btn-secondary" onclick="window.print()">
-                            <i class="fas fa-print"></i>
-                            Imprimer le profil
-                        </a>
+                        <button id="downloadPdfBtn" class="btn-primary" onclick="downloadClientPDF(event)">
+                            <i class="fas fa-download"></i>
+                            Télécharger le reçu PDF
+                        </button>
                     </div>
                 </div>
             </div>
@@ -459,8 +458,16 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- AGEF Database (Cloud) -->
     <script src="../js/database-supabase.js"></script>
+    <!-- PDF Generation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- NEW: Industry-standard PDF API client (Puppeteer-based) -->
+    <script src="../js/pdf-api-client.js"></script>
 
     <script>
+        // Global variable to store current client
+        let currentClient = null;
+
         // Load client data from URL parameter
         async function loadClientData() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -480,6 +487,7 @@
             }
 
             const client = AGEFDatabase.formatClient(rawClient);
+            currentClient = client; // Store globally for PDF generation
 
             // Update page content
             document.getElementById('clientName').textContent = client.name;
@@ -506,16 +514,51 @@
                 statusBanner.classList.add('paid');
             }
 
-            // Update receipt button link
-            const receiptBtn = document.getElementById('receiptBtn');
-            receiptBtn.href = `admin-recu-client.html?client=${clientId}`;
         }
 
-        function generateReceipt(event) {
+        // Download PDF directly from profile page
+        async function downloadClientPDF(event) {
             event.preventDefault();
-            const urlParams = new URLSearchParams(window.location.search);
-            const clientId = urlParams.get('client');
-            window.location.href = `admin-recu-client.html?client=${clientId}`;
+
+            try {
+                // Check if client data is loaded
+                if (!currentClient) {
+                    alert('Les données du client ne sont pas encore chargées. Veuillez patienter.');
+                    return;
+                }
+
+                // Show loading state on button
+                const button = event.target.closest('button');
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Génération en cours...';
+                button.disabled = true;
+
+                console.log('🎯 Starting PDF generation from profile page');
+
+                // Generate PDF using industry-standard Puppeteer API
+                const success = await PDFAPIClient.generateReceipt(currentClient);
+
+                // Restore button state
+                button.innerHTML = originalHTML;
+                button.disabled = false;
+
+                if (success) {
+                    console.log('✅ PDF generated and downloaded successfully');
+                }
+
+            } catch (error) {
+                console.error('❌ Error in downloadClientPDF():', error);
+                alert('Erreur lors de la génération du PDF. Veuillez réessayer.\n\nDétails: ' + error.message);
+
+                // Restore button
+                if (event && event.target) {
+                    const button = event.target.closest('button');
+                    if (button) {
+                        button.innerHTML = '<i class="fas fa-download"></i> Télécharger le reçu PDF';
+                        button.disabled = false;
+                    }
+                }
+            }
         }
 
         function logout() {

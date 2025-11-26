@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Récépissé d'Ouverture de Dossier</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: white;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+        }
+
+        .receipt-container {
+            width: 909px;
+            height: 1286px;
+            margin: 0 auto;
+            background: white;
+            position: relative;
+            padding: 40px 60px;
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .header-left {
+            flex: 1;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+
+        .header-center {
+            flex: 1;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .header-right {
+            flex: 1;
+            text-align: right;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+
+        .agef-logo {
+            width: 96px;
+            height: 50px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .emblem {
+            width: 57px;
+            height: 50px;
+            display: block;
+            margin-left: auto;
+        }
+
+        /* Green Banner */
+        .green-banner {
+            background-color: #2B8E38;
+            color: white;
+            text-align: center;
+            padding: 8px 20px;
+            font-size: 14pt;
+            font-weight: bold;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        /* Main Title */
+        .main-title {
+            text-align: center;
+            font-size: 13pt;
+            font-weight: bold;
+            margin: 20px 0;
+            line-height: 1.4;
+        }
+
+        /* Content Section */
+        .content {
+            font-size: 11pt;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        .field-row {
+            margin: 8px 0;
+        }
+
+        .field-label {
+            font-weight: bold;
+        }
+
+        .field-value {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+        }
+
+        .explanation-text {
+            margin: 20px 0;
+            text-align: justify;
+            font-size: 10.5pt;
+            line-height: 1.5;
+        }
+
+        /* QR Code Section */
+        .qr-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .qr-code {
+            width: 111px;
+            height: 111px;
+            display: inline-block;
+        }
+
+        .qr-text {
+            font-size: 9pt;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            right: 60px;
+            text-align: center;
+            font-size: 9pt;
+            color: #FF6600;
+            font-style: italic;
+        }
+
+        /* Watermark */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            opacity: 0.08;
+            width: 600px;
+            height: auto;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* AGEF vertical text */
+        .agef-vertical {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            font-size: 28pt;
+            font-weight: bold;
+            color: #2B8E38;
+            letter-spacing: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt-container">
+        <!-- Watermark -->
+        <img src="/images/receipt/watermark.png" class="watermark" alt="Watermark">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <strong>MINISTERE DE LA CONSTRUCTION DU<br>
+                LOGEMENT ET DE L'URBANISME</strong><br>
+                -------------<br>
+                <strong>AGENCE DE GESTION FONCIERE</strong>
+            </div>
+            <div class="header-center">
+                <img src="/images/receipt/agef-logo.png" class="agef-logo" alt="AGEF Logo">
+            </div>
+            <div class="header-right">
+                <strong>REPUBLIQUE DE CÔTE D'IVOIRE</strong><br>
+                -------------<br>
+                <strong>Union-Discipline-Travail</strong><br>
+                <img src="/images/receipt/cote-ivoire-emblem.png" class="emblem" alt="Côte d'Ivoire Emblem">
+            </div>
+        </div>
+
+        <!-- Green Banner -->
+        <div class="green-banner">
+            ATTESTATION D'OUVERTURE DE DOSSIER FONCIER
+        </div>
+
+        <!-- Main Title -->
+        <div class="main-title">
+            RÉCÉPISSÉ D'OUVERTURE DE DOSSIER D'ACQUISITION DE PARCELLE<br>
+            [LOT : NUMERO_LOT] à [NOM_DU_SITE]
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="field-row">
+                <span class="field-label">Reçu de M./Mme/Mlle :</span>
+                <span class="field-value">[NOM_COMPLET_UTILISATEUR] Contact</span>
+            </div>
+
+            <div class="field-row">
+                <span class="field-label">Téléphonique :</span>
+                <span class="field-value">[NUMERO_TELEPHONE] (Ex: 07 07 12 34 56)</span>
+            </div>
+
+            <div class="field-row">
+                <span class="field-label">Montant Payé :</span>
+                <span class="field-value">[MONTANT_PAYÉ] FCFA (Ex: 25.000 FCFA)</span>
+            </div>
+
+            <div class="field-row">
+                <span class="field-label">Motif du Paiement :</span>
+                <span class="field-value">Frais d'Ouverture de Dossier & Sécurisation Initiale</span>
+            </div>
+
+            <div class="field-row">
+                <span class="field-label">Mode de Paiement :</span>
+                <span class="field-value">[MODE_PAIEMENT] (Ex: Mobile Money - Wave) <strong>ID de Transaction :</strong> [ID_TRANSACTION_OPERATEUR] (Ex: W-9876543210)</span>
+            </div>
+
+            <div class="field-row">
+                <span class="field-label">Lot N° :</span>
+                <span class="field-value">[NUMERO_LOT] (Ex: 402) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Îlot N° :</strong> [NUMERO_ILOT] (Ex: 12)</span>
+            </div>
+
+            <div class="field-row">
+                <span class="field-label">Opération / Site :</span>
+                <span class="field-value">[NOM_DU_SITE] (Ex: Songon-Kassemblé "Cité des Merveilles")</span>
+            </div>
+
+            <div class="field-row">
+                <span class="field-label">Superficie :</span>
+                <span class="field-value">{SURFACE} m²</span>
+            </div>
+
+            <div class="field-row">
+                <span class="field-label">Statut du Dossier :</span>
+                <span class="field-value">OUVERT - EN ATTENTE DE RÉSERVATION (10%)</span>
+            </div>
+
+            <div class="field-row">
+                <span class="field-label">Prix total de la parcelle :</span>
+                <span class="field-value">[PRIX TOTAL] FCFA</span>
+            </div>
+
+            <!-- Explanation Paragraph -->
+            <div class="explanation-text">
+                Le présent récépissé atteste que M./Mme <strong>[NOM PRÉNOMS]</strong> a versé la somme de
+                <strong>[MONTANT PAYÉ] FCFA</strong> au titre de frais d'ouverture et d'étude de dossier pour la demande
+                d'acquisition de la parcelle n° <strong>[N° LOT]</strong> située à <strong>[SITE / LOCALITÉ]</strong>. Ces frais couvrent
+                uniquement le traitement administratif du dossier ; ils ne constituent ni acompte sur le prix de la
+                parcelle, ni réservation, ni titre de propriété. Les conditions de réservation (acompte minimum
+                de 10 % et paiement du solde) sont précisées dans les conditions générales accessibles via le
+                QR Code ci-dessous.
+            </div>
+
+            <!-- QR Code Section -->
+            <div class="qr-section">
+                <img src="/images/receipt/qr-code-placeholder.jpg" class="qr-code" alt="QR Code">
+                <div class="qr-text">
+                    Scannez ce QR Code pour consulter les conditions générales de réservation de votre parcelle.
+                </div>
+            </div>
+        </div>
+
+        <!-- AGEF Vertical Text -->
+        <div class="agef-vertical">AGEF</div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Ce document est un titre provisoire. Il atteste de l'ouverture du dossier et de la priorité sur le lot désigné.<br>
+            Il ne remplace pas l'Attestation de Droit d'Usage (ADU) finale.
+        </div>
+    </div>
+</body>
+</html>

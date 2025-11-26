@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log
+.git
+.gitignore
+.vercel
+.DS_Store
+*.log
+.env*
+!.env.example
+README.md
+DEPLOYMENT_GUIDE.md
+IMPLEMENTATION_SUMMARY.md
+install.sh
+.claude
+vercel.json

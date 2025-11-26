@@ -564,6 +564,15 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/main.js"></script>
 
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/database-supabase.js"></script>
+
+    <!-- PDF Generation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="../js/pdf-generator.js"></script>
+
     <script>
         // Mock client data
         const mockClients = {
@@ -679,72 +688,137 @@
             return words.trim() + " francs CFA";
         }
 
-        // Load receipt data
-        function loadReceiptData() {
+        // Global variable to store current client data
+        let currentClient = null;
+
+        // Load receipt data from Supabase
+        async function loadReceiptData() {
             const urlParams = new URLSearchParams(window.location.search);
             const clientId = urlParams.get('client');
 
-            if (!clientId || !mockClients[clientId]) {
-                alert('Client non trouvé');
+            if (!clientId) {
+                alert('ID client manquant dans l\'URL');
                 window.location.href = 'admin-gestion-clients.html';
                 return;
             }
 
-            const client = mockClients[clientId];
+            try {
+                // Initialize database
+                await AGEFDatabase.init();
 
-            // Update back link
-            document.getElementById('backLink').href = `admin-profile-client.html?client=${clientId}`;
+                // Fetch client from Supabase
+                console.log('📥 Fetching client from Supabase:', clientId);
+                const rawClient = await AGEFDatabase.getClientById(clientId);
 
-            // Generate receipt number
-            const receiptNumber = `AGEF-2024-${String(client.id).padStart(4, '0')}`;
-            document.getElementById('receiptNumber').textContent = receiptNumber;
+                if (!rawClient) {
+                    alert('Client non trouvé dans la base de données');
+                    window.location.href = 'admin-gestion-clients.html';
+                    return;
+                }
 
-            // Set current date
-            const today = new Date();
-            const dateStr = today.toLocaleDateString('fr-FR', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            });
-            document.getElementById('issueDate').textContent = dateStr;
+                // Format client data
+                const client = AGEFDatabase.formatClient(rawClient);
+                currentClient = client; // Store globally for PDF generation
 
-            // Update client information
-            document.getElementById('clientName').textContent = client.name;
-            document.getElementById('clientType').textContent = client.type;
-            document.getElementById('phone').textContent = client.phone;
-            document.getElementById('email').textContent = client.email;
+                console.log('✅ Client loaded:', client);
 
-            // Update property information
-            document.getElementById('saleType').textContent = client.saleType;
-            document.getElementById('location').textContent = client.location;
-            document.getElementById('parcelRef').textContent = client.parcelRef;
-            document.getElementById('area').textContent = client.area;
+                // Update back link
+                document.getElementById('backLink').href = `admin-profile-client.html?client=${clientId}`;
 
-            // Update payment details
-            document.getElementById('totalPrice').textContent = client.price;
-            document.getElementById('deposit').textContent = client.deposit;
-            document.getElementById('remaining').textContent = client.remaining;
-            document.getElementById('amountPaid').textContent = client.deposit;
-            document.getElementById('paymentMethod').textContent = client.paymentMethod;
-            document.getElementById('paymentDate').textContent = client.subscriptionDate;
-            document.getElementById('transactionRef').textContent = client.transactionRef;
+                // Generate receipt number
+                const receiptNumber = `AGEF-2024-${String(client.id).padStart(4, '0')}`;
+                document.getElementById('receiptNumber').textContent = receiptNumber;
 
-            // Convert amount to words
-            const amountInWords = numberToWords(client.depositNumeric);
-            document.getElementById('amountInWords').textContent = amountInWords.charAt(0).toUpperCase() + amountInWords.slice(1);
+                // Set current date
+                const today = new Date();
+                const dateStr = today.toLocaleDateString('fr-FR', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+                document.getElementById('issueDate').textContent = dateStr;
+
+                // Update client information
+                document.getElementById('clientName').textContent = client.name;
+                document.getElementById('clientType').textContent = client.type;
+                document.getElementById('phone').textContent = client.phone;
+                document.getElementById('email').textContent = client.email;
+
+                // Update property information
+                document.getElementById('saleType').textContent = client.saleType;
+                document.getElementById('location').textContent = client.location;
+                document.getElementById('parcelRef').textContent = client.parcelRef;
+                document.getElementById('area').textContent = client.area;
+
+                // Update payment details
+                document.getElementById('totalPrice').textContent = client.price;
+                document.getElementById('deposit').textContent = client.deposit;
+                document.getElementById('remaining').textContent = client.remaining;
+                document.getElementById('amountPaid').textContent = client.deposit;
+                document.getElementById('paymentMethod').textContent = client.paymentMethod;
+                document.getElementById('paymentDate').textContent = client.subscriptionDate;
+                document.getElementById('transactionRef').textContent = client.transactionRef;
+
+                // Convert amount to words
+                const amountInWords = numberToWords(client.depositNumeric);
+                document.getElementById('amountInWords').textContent = amountInWords.charAt(0).toUpperCase() + amountInWords.slice(1);
+
+            } catch (error) {
+                console.error('❌ Error loading client data:', error);
+                alert('Erreur lors du chargement des données client.\n\nDétails: ' + error.message);
+            }
         }
 
-        function downloadPDF() {
-            alert('La fonctionnalité de téléchargement PDF sera bientôt disponible.\nPour le moment, veuillez utiliser l\'option "Imprimer" puis "Enregistrer au format PDF".');
+        async function downloadPDF() {
+            try {
+                // Check if client data is loaded
+                if (!currentClient) {
+                    alert('Les données du client ne sont pas encore chargées. Veuillez patienter.');
+                    return;
+                }
+
+                // Show loading state on button
+                const button = event.target.closest('button');
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Génération en cours...';
+                button.disabled = true;
+
+                console.log('🎯 Starting PDF generation with Supabase data');
+
+                // Generate PDF using the template and Supabase data
+                const success = await AGEFPDFGenerator.generateReceipt(currentClient);
+
+                // Restore button state
+                button.innerHTML = originalHTML;
+                button.disabled = false;
+
+                if (success) {
+                    console.log('✅ PDF generated and downloaded successfully from Supabase data');
+                }
+
+            } catch (error) {
+                console.error('❌ Error in downloadPDF():', error);
+                alert('Erreur lors de la génération du PDF. Veuillez réessayer.\n\nDétails: ' + error.message);
+
+                // Restore button
+                if (event && event.target) {
+                    const button = event.target.closest('button');
+                    if (button) {
+                        button.innerHTML = '<i class="fas fa-download"></i> Télécharger PDF';
+                        button.disabled = false;
+                    }
+                }
+            }
         }
 
         function emailReceipt() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const clientId = urlParams.get('client');
-            const client = mockClients[clientId];
+            if (!currentClient) {
+                alert('Les données du client ne sont pas encore chargées. Veuillez patienter.');
+                return;
+            }
 
-            if (confirm(`Envoyer le reçu par email à ${client.email} ?`)) {
-                alert('Le reçu a été envoyé avec succès !');
+            if (confirm(`Envoyer le reçu par email à ${currentClient.email} ?`)) {
+                alert('La fonctionnalité d\'envoi par email sera bientôt disponible.\n\nPour le moment, vous pouvez télécharger le PDF et l\'envoyer manuellement.');
             }
         }
 
