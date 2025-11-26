@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vente de Terrains - Agence de Gestion Foncière</title>
+
+    <!-- Local CSS Files -->
+    <link rel='stylesheet' href='../css/bootstrap.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../css/all.min.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel='stylesheet' href='../css/line-awesome.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../css/paroti-style.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../css/template.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../css/paroti-child-style.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../css/frontend.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../css/smartslider.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../css/post-10.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../css/post-1566.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../css/post-865.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../css/post-866.css' type='text/css' media='all' />
+
+    <link rel="icon" href="../images/logo.png" sizes="32x32" />
+
+    <style>
+        /* Custom inline styles */
+        :root {
+            --paroti-nfpage-image-width: 430px;
+        }
+
+        ul.gva-nav-menu>li .submenu-inner li a,
+        ul.gva-nav-menu>li ul.submenu-inner li a {
+            text-transform: none;
+        }
+
+        .current-menu-item>a {
+            color: #2B8E38 !important;
+        }
+
+        .current-menu-ancestor>a {
+            color: #2B8E38 !important;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        /* Land card styles */
+        .land-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .land-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .land-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .land-card-content {
+            padding: 25px;
+        }
+
+        .land-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2B8E38;
+            margin-bottom: 15px;
+        }
+
+        .land-card-details {
+            margin-bottom: 20px;
+        }
+
+        .land-detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .land-detail-item i {
+            color: #2B8E38;
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .land-card-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2B8E38;
+            margin-bottom: 15px;
+        }
+
+        .btn-contact {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #2B8E38;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn-contact:hover {
+            background-color: #236d2d;
+            color: white;
+            text-decoration: none;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Responsive CTA Button */
+        .btn-cta-primary {
+            display: inline-block;
+            padding: 18px 50px;
+            background-color: #2B8E38;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 20px rgba(43, 142, 56, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-cta-primary:hover {
+            background-color: #236d2d;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(43, 142, 56, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .btn-cta-primary {
+                font-size: 1rem;
+                /* Reduced font size */
+                padding: 15px 30px;
+                /* Reduced padding */
+                width: 100%;
+                /* Full width on mobile */
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../images/elementor/css/post-1824.css" type="text/css" media="all" />
+</head>
+
+<body class="home page-template-default page page-id-1566 theme-paroti">
+    <div class="paroti-page-loading"></div>
+
+    <div class="wrapper-page">
+        <!-- Header -->
+        <header></header>
+
+        <!-- Main Content -->
+
+        <div id="page-content"> <!--page content-->
+
+            <section id="wp-main-content" class="clearfix main-page">
+                <div class="main-page-content">
+                    <div class="content-page">
+                        <div id="wp-content" class="wp-content clearfix">
+
+                            <div class="single-page-template">
+
+
+                                <div class="container-full single-content-inner">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="clearfix post-1824 page type-page status-publish hentry"
+                                                id="1824">
+
+
+                                                <!-- Main Content Section -->
+                                                <section class="elementor-section elementor-top-section"
+                                                    style="padding: 80px 0;">
+                                                    <div class="elementor-container">
+                                                        <div class="row">
+                                                            <div class="col-md-8 offset-md-2">
+                                                                <div class="gsc-heading"
+                                                                    style="text-align: center; margin-bottom: 40px;">
+                                                                    <h2 class="title"
+                                                                        style="font-size: 2rem; color: #2B8E38; margin-bottom: 20px;">
+                                                                        Félicitations !</h2>
+                                                                    <p
+                                                                        style="font-size: 1.2rem; line-height: 1.6; color: #555;">
+                                                                        Vous êtes à un clic de devenir propriétaire d'un
+                                                                        terrain en toute légalité. Nous avons simplifié
+                                                                        le processus pour que votre rêve devienne
+                                                                        réalité, sans stress ni complications.
+                                                                    </p>
+
+                                                                    <div style="margin-top: 30px;">
+                                                                        <a href="vente-terrain/localisation.html"
+                                                                            class="btn-cta-primary">
+                                                                            DÉMARRER L'ACQUISITION <i
+                                                                                class="fas fa-arrow-right"
+                                                                                style="margin-left: 10px;"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="feature-box"
+                                                                    style="background: #eafaf1; padding: 30px; border-radius: 10px; margin-bottom: 30px; color: #000;">
+                                                                    <h3 style="color: #000; margin-bottom: 20px;">Ce que
+                                                                        vous allez acquérir :</h3>
+                                                                    <ul style="list-style: none; padding: 0;">
+                                                                        <li
+                                                                            style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+                                                                            <i class="fas fa-check-circle"
+                                                                                style="color: #2B8E38; margin-right: 10px; margin-top: 5px;"></i>
+                                                                            <div><strong>Un Terrain 100% Sécurisé
+                                                                                    :</strong> Nous vous offrons des
+                                                                                parcelles vérifiées et prêtes à être
+                                                                                construites.</div>
+                                                                        </li>
+                                                                        <li
+                                                                            style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+                                                                            <i class="fas fa-check-circle"
+                                                                                style="color: #2B8E38; margin-right: 10px; margin-top: 5px;"></i>
+                                                                            <div><strong>Les Documents Essentiels,
+                                                                                    Inclus :</strong> Dès votre achat,
+                                                                                vous recevrez immédiatement :
+                                                                                <ul
+                                                                                    style="list-style: none; padding-left: 20px; margin-top: 10px;">
+                                                                                    <li
+                                                                                        style="margin-bottom: 10px; display: flex; align-items: center;">
+                                                                                        <span
+                                                                                            style="margin-right: 8px;">-</span>
+                                                                                        <span><strong>L'Attestation de
+                                                                                                Droit d'Usage
+                                                                                                (ADU):</strong>La preuve
+                                                                                            légale et irréfutable de
+                                                                                            votre propriété
+                                                                                            future.</span>
+                                                                                    </li>
+                                                                                    <li
+                                                                                        style="margin-bottom: 10px; display: flex; align-items: center;">
+                                                                                        <span
+                                                                                            style="margin-right: 8px;">-</span>
+                                                                                        <span><strong>Le Certificat de
+                                                                                                Conformité Urbaine
+                                                                                                :</strong> Pour garantir
+                                                                                            la constructibilité.</span>
+                                                                                    </li>
+                                                                                    <li
+                                                                                        style="margin-bottom: 10px; display: flex; align-items: center;">
+                                                                                        <span
+                                                                                            style="margin-right: 8px;">-</span>
+                                                                                        <span><strong>Un Plan de
+                                                                                                Localisation Détaillé
+                                                                                                :</strong> Pour situer
+                                                                                            votre bien avec
+                                                                                            précision.</span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+
+                                                                <div style="margin-bottom: 40px; color: #000;">
+                                                                    <h3
+                                                                        style="color: #000; margin-bottom: 30px; text-align: center;">
+                                                                        Un
+                                                                        Processus Transparent et Fluide :</h3>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4"
+                                                                            style="text-align: center; margin-bottom: 20px;">
+                                                                            <h4
+                                                                                style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: #000;">
+                                                                                Simplicité</h4>
+                                                                            <p style="font-size: 1rem; color: #000;">
+                                                                                Notre
+                                                                                plateforme vous guide étape par étape.
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="col-md-4"
+                                                                            style="text-align: center; margin-bottom: 20px;">
+                                                                            <h4
+                                                                                style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: #000;">
+                                                                                Accessibilité</h4>
+                                                                            <p style="font-size: 1rem; color: #000;">
+                                                                                Aucune
+                                                                                paperasse compliquée. Tout est clair.
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="col-md-4"
+                                                                            style="text-align: center; margin-bottom: 20px;">
+                                                                            <h4
+                                                                                style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: #000;">
+                                                                                Rapidité</h4>
+                                                                            <p style="font-size: 1rem; color: #000;">
+                                                                                Finalisez
+                                                                                votre achat en ligne en un temps record.
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div style="text-align: center; margin-bottom: 50px;">
+                                                                    <h3 style="margin-bottom: 20px;">Pourquoi acheter
+                                                                        maintenant ?</h3>
+                                                                    <p style="margin-bottom: 30px; color: #666;">
+                                                                        Investir dans la terre, c'est sécuriser votre
+                                                                        patrimoine et celui de votre famille. Commencez
+                                                                        votre projet de construction ou d'investissement
+                                                                        dès aujourd'hui avec une tranquillité d'esprit
+                                                                        totale.</p>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                            </div>
+                                            <div class="link-pages"></div>
+
+                                            <div class="comment-page-wrapper clearfix">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </section>
+
+    </div><!--end page content-->
+
+    </div>
+    <!-- Footer -->
+    <footer></footer>
+    </div>
+
+    <!-- Local JavaScript Files -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/frontend.min.js"></script>
+    <script src="../js/layout.js"></script>
+
+    <style>
+        /* Bootstrap grid */
+        .container,
+        .elementor-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col-md-3,
+        .col-md-4,
+        .col-md-6 {
+            padding: 0 15px;
+        }
+
+        .col-md-3 {
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+
+        .col-md-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+        }
+
+        .col-md-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        @media (max-width: 768px) {
+
+            .col-md-3,
+            .col-md-4,
+            .col-md-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</body>
+
+</html>

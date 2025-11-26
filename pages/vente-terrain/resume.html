@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souscription - Étape 5 : Résumé</title>
+
+    <!-- CSS Files -->
+    <link rel='stylesheet' href='../../css/bootstrap.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel='stylesheet' href='../../css/paroti-style.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../../css/custom-flow.css' type='text/css' media='all' />
+
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .header-simple {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .logo-img {
+            max-height: 60px;
+        }
+
+        .summary-label i {
+            width: 20px;
+            text-align: center;
+            margin-right: 8px;
+            color: #2B8E38;
+        }
+
+        /* Mobile responsive styles for payment fee section */
+        @media (max-width: 768px) {
+            .summary-card .summary-label[style*="font-size: 1.1rem"] {
+                font-size: 0.9rem !important;
+            }
+
+            .summary-card .summary-value[style*="font-size: 1.5rem"] {
+                font-size: 1.1rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Simple Header -->
+    <header class="header-simple">
+        <div class="container">
+            <div class="text-center">
+                <a href="../../index.html">
+                    <img src="../../images/logo.png" alt="AGEF" class="logo-img">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Breadcrumbs -->
+        <div class="flow-breadcrumbs">
+            <div class="breadcrumb-step completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-label">Localisation</div>
+            </div>
+            <div class="step-connector completed"></div>
+            <div class="breadcrumb-step completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-label">Conditions</div>
+            </div>
+            <div class="step-connector completed"></div>
+            <div class="breadcrumb-step completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-label">Identité</div>
+            </div>
+            <div class="step-connector completed"></div>
+            <div class="breadcrumb-step completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-label">Lots</div>
+            </div>
+            <div class="step-connector completed"></div>
+            <div class="breadcrumb-step active">
+                <div class="step-circle">5</div>
+                <div class="step-label">Résumé</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">6</div>
+                <div class="step-label">Paiement</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="text-center mb-5">
+                    <h2 class="mb-3">Vérifiez vos informations</h2>
+                    <p class="text-muted">Assurez-vous que tout est correct avant de passer au paiement.</p>
+                </div>
+
+                <!-- Information Box -->
+                <div class="mb-4"
+                    style="background: #e7f3ff; border: 2px solid #2196F3; border-radius: 10px; padding: 25px;">
+                    <div style="display: flex; align-items: flex-start;">
+                        <i class="fas fa-info-circle"
+                            style="color: #2196F3; font-size: 1.5rem; margin-right: 15px; margin-top: 3px;"></i>
+                        <div>
+                            <h5 style="color: #2196F3; margin-bottom: 15px; font-weight: 600;">INFORMATION :</h5>
+                            <p style="margin-bottom: 12px; line-height: 1.6; color: #333;">
+                                Votre demande d'acquisition a été <strong>automatiquement enregistrée</strong>.
+                                Veuillez maintenant procéder au paiement en cliquant sur le bouton ci-dessous.
+                            </p>
+                            <p style="margin-bottom: 0; line-height: 1.6; color: #333;">
+                                <strong>Une fois le paiement effectué, envoyez la capture d'écran sur WhatsApp pour
+                                    finaliser votre acquisition.</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-card mb-4">
+                    <h4 class="mb-4" style="color: #2B8E38; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px;">
+                        Informations Personnelles</h4>
+
+                    <div class="summary-row">
+                        <span class="summary-label">Nom & Prénoms</span>
+                        <span class="summary-value" id="sumName"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Genre</span>
+                        <span class="summary-value" id="sumGender"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Date de Naissance</span>
+                        <span class="summary-value" id="sumDateOfBirth"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Téléphone (WhatsApp)</span>
+                        <span class="summary-value" id="sumPhone"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Profession</span>
+                        <span class="summary-value" id="sumProf"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Nationalité</span>
+                        <span class="summary-value" id="sumNat"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Type de Document</span>
+                        <span class="summary-value" id="sumDocType"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Numéro du Document</span>
+                        <span class="summary-value" id="sumDocNumber"></span>
+                    </div>
+                    <div class="summary-row" id="residenceRow" style="display: none;">
+                        <span class="summary-label">Résidence</span>
+                        <span class="summary-value" id="sumResidence"></span>
+                    </div>
+                </div>
+
+                <div class="summary-card mb-4">
+                    <h4 class="mb-4" style="color: #2B8E38; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px;">
+                        Détails du Bien</h4>
+
+                    <div class="summary-row">
+                        <span class="summary-label">Localisation</span>
+                        <span class="summary-value" id="sumLoc"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Numéro de Lot</span>
+                        <span class="summary-value">Lot <span id="sumLotId"></span></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Superficie</span>
+                        <span class="summary-value"><span id="sumLotSize"></span> m²</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Prix du Terrain</span>
+                        <span class="summary-value"><span id="sumLotPrice"></span> FCFA</span>
+                    </div>
+                </div>
+
+                <div class="summary-card mb-4" style="background-color: #f0f9f1; border: 1px solid #2B8E38;">
+                    <div class="summary-row" style="border: none;">
+                        <span class="summary-label" style="color: #333; font-size: 1.1rem;">Frais de dossier à
+                            payer</span>
+                        <span class="summary-value" style="color: #2B8E38; font-size: 1.5rem;">50.000 FCFA</span>
+                    </div>
+                </div>
+
+                <div class="flow-nav">
+                    <a href="identite.html" class="btn-back">Modifier</a>
+                    <button type="button" class="btn-next" onclick="validateAndPay()">APPROUVER ET PAYER</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check prev steps
+        if (!sessionStorage.getItem('agef_lot_id')) {
+            window.location.href = 'lots.html';
+        }
+
+        // Populate Data
+        document.getElementById('sumName').textContent = sessionStorage.getItem('agef_user_name');
+        document.getElementById('sumGender').textContent = sessionStorage.getItem('agef_user_gender');
+        document.getElementById('sumDateOfBirth').textContent = sessionStorage.getItem('agef_user_dateOfBirth');
+        document.getElementById('sumPhone').textContent = sessionStorage.getItem('agef_user_phone');
+        document.getElementById('sumProf').textContent = sessionStorage.getItem('agef_user_profession');
+        document.getElementById('sumNat').textContent = sessionStorage.getItem('agef_user_nationality');
+        document.getElementById('sumDocType').textContent = sessionStorage.getItem('agef_user_documentType');
+        document.getElementById('sumDocNumber').textContent = sessionStorage.getItem('agef_user_documentNumber');
+
+        // Show residence if provided
+        const residence = sessionStorage.getItem('agef_user_residence');
+        if (residence && residence.trim() !== '') {
+            document.getElementById('sumResidence').textContent = residence;
+            document.getElementById('residenceRow').style.display = 'flex';
+        }
+
+        document.getElementById('sumLoc').textContent = sessionStorage.getItem('agef_location_name');
+        document.getElementById('sumLotId').textContent = sessionStorage.getItem('agef_lot_id');
+        document.getElementById('sumLotSize').textContent = sessionStorage.getItem('agef_lot_size');
+        document.getElementById('sumLotPrice').textContent = sessionStorage.getItem('agef_lot_price');
+
+        function validateAndPay() {
+            // Lock data (conceptually)
+            window.location.href = 'paiement.html';
+        }
+    </script>
+</body>
+
+</html>

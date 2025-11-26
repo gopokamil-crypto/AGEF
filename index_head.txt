@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Accueil - Agence de Gestion Foncière</title>
+
+    <!-- Local CSS Files -->
+    <link rel='stylesheet' href='css/bootstrap.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/all.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/line-awesome.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/paroti-style.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/template.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/paroti-child-style.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/frontend.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/smartslider.min.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/post-10.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/post-1566.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/post-865.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='css/post-866.css' type='text/css' media='all' />
+
+    <link rel="icon" href="images/logo.png" sizes="32x32" />
+
+    <style>
+        /* Custom inline styles */
+        :root {
+            --paroti-nfpage-image-width: 430px;
+        }
+
+        ul.gva-nav-menu>li .submenu-inner li a,
+        ul.gva-nav-menu>li ul.submenu-inner li a {
+            text-transform: none;
+        }
+
+        .current-menu-item>a {
+            color: #2B8E38 !important;
+        }
+
+        .current-menu-ancestor>a {
+            color: #2B8E38 !important;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="home page-template-default page page-id-1566 theme-paroti">
+    <div class="paroti-page-loading"></div>
+
+    <div class="wrapper-page">
+        <!-- Header -->
+        <header class="wp-site-header header-builder-frontend header-position-relative">
+            <!-- Mobile Header -->
+            <div class="header-mobile header_mobile_screen">
+                <div class="header-mobile-content">
+                    <div class="header-content-inner clearfix">
+                        <div class="header-left">
+                            <div class="logo-mobile">
+                                <a href="index.html">
+                                    <img src="images/logo.png" alt="Agence de Gestion Foncière" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="header-right">
+                            <div class="canvas-mobile">
+                                <div class="canvas-menu gva-offcanvas">
+                                    <a class="dropdown-toggle" data-canvas=".mobile" href="#"><i
+                                            class="icon las la-bars"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desktop Header -->
+            <div class="header_default_screen">
+                <div class="header-builder-inner">
+                    <div class="header-main-wrapper">
+                        <!-- Logo Section -->
+                        <section class="elementor-section">
+                            <div class="elementor-container">
+                                <div class="gsc-logo text-center">
+                                    <a class="site-branding-logo" href="index.html" title="Home">
+                                        <img src="images/logo.png" alt="Home" />
+                                    </a>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Navigation Section -->
+                        <section class="elementor-section">
+                            <div class="elementor-container">
+                                <div class="gva-navigation-menu menu-align-left">
+                                    <ul class="gva-nav-menu gva-main-menu">
+                                        <li class="menu-item current-menu-item"><a href="index.html"><span
+                                                    class="menu-title">Accueil</span></a></li>
+                                        <li class="menu-item"><a href="pages/about.html"><span class="menu-title">A
+                                                    propos</span></a></li>
+                                        <li class="menu-item menu-item-has-children">
+                                            <a href="#"><span class="menu-title">Services</span><span
+                                                    class="caret"></span></a>
+                                            <ul class="submenu-inner">
+                                                <li><a href="pages/amenagement-foncier.html"><span
+                                                            class="menu-title">Amenagement foncier</span></a></li>
+                                                <li><a href="pages/commercialisation-terrains.html"><span
+                                                            class="menu-title">Commercialisation terrains</span></a>
+                                                </li>
+                                                <li><a href="pages/reserves-foncieres.html"><span
+                                                            class="menu-title">Réserves foncières</span></a></li>
+                                                <li><a href="pages/securisation-fonciere.html"><span
+                                                            class="menu-title">Sécurisation foncière</span></a></li>
+                                                <li><a href="pages/ingenierie-fonciere.html"><span
+                                                            class="menu-title">Ingénierie foncière</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item menu-item-has-children">
+                                            <a href="#"><span class="menu-title">Procédures</span><span
+                                                    class="caret"></span></a>
+                                            <ul class="submenu-inner">
+                                                <li><a href="pages/procedures-acd.html"><span
+                                                            class="menu-title">Procédures ACD</span></a></li>
+                                                <li><a href="pages/procedure-mutation.html"><span
+                                                            class="menu-title">Procédure mutation</span></a></li>
+                                                <li><a href="pages/lots-de-compensation.html"><span
+                                                            class="menu-title">Lots de compensation</span></a></li>
+                                                <li><a href="pages/attestation-fin-de-paiement.html"><span
+                                                            class="menu-title">Attestation fin de paiement</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item menu-item-has-children">
+                                            <a href="#"><span class="menu-title">Cadre juridique</span><span
+                                                    class="caret"></span></a>
+                                            <ul class="submenu-inner">
+                                                <li><a href="pages/lois-et-ordonnances.html"><span
+                                                            class="menu-title">Lois et ordonnances</span></a></li>
+                                                <li><a href="pages/decrets.html"><span
+                                                            class="menu-title">Décrets</span></a></li>
+                                                <li><a href="pages/arretes.html"><span
+                                                            class="menu-title">Arrêtés</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item"><a href="pages/realisations.html"><span
+                                                    class="menu-title">Réalisations</span></a></li>
+                                        <li class="menu-item"><a href="pages/contact.html"><span
+                                                    class="menu-title">Contactez-nous</span></a></li>

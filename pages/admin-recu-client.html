@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="fr-FR" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reçu Client - Administration - AGEF</title>
+
+    <!-- CSS Links -->
+    <link rel='stylesheet' href='../css/bootstrap.css' />
+    <link rel='stylesheet' href='../css/all.min.css' />
+    <link rel='stylesheet' href='../css/line-awesome.min.css' />
+    <link rel='stylesheet' href='../css/paroti-style.css' />
+    <link rel='stylesheet' href='../css/template.css' />
+    <link rel='stylesheet' href='../css/paroti-child-style.css' />
+    <link rel='stylesheet' href='../css/frontend.min.css' />
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap'
+        rel='stylesheet' />
+
+    <style>
+        .admin-header {
+            background-color: #2B8E38;
+            padding: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .admin-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+
+        .admin-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #2B8E38;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 30px 0 20px 0;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #237a2f;
+        }
+
+        .receipt-container {
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            background: white;
+            border-radius: 10px;
+            padding: 60px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .receipt-header {
+            text-align: center;
+            border-bottom: 3px solid #2B8E38;
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .receipt-logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .receipt-title {
+            color: #2B8E38;
+            font-size: 36px;
+            font-weight: 800;
+            margin: 20px 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .receipt-number {
+            color: #666666;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .receipt-date {
+            color: #666666;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .info-section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            color: #2B8E38;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #E8F5E9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-box {
+            background: #F8F9FA;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #2B8E38;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #EDEDED;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #666666;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .info-value {
+            color: #144047;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .payment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .payment-table thead {
+            background-color: #2B8E38;
+            color: white;
+        }
+
+        .payment-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        .payment-table td {
+            padding: 15px;
+            border-bottom: 1px solid #EDEDED;
+            color: #144047;
+        }
+
+        .payment-table tbody tr:last-child td {
+            border-bottom: 2px solid #2B8E38;
+        }
+
+        .total-row {
+            background-color: #E8F5E9;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .total-row td {
+            color: #2B8E38;
+            padding: 20px 15px !important;
+        }
+
+        .amount-in-words {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .amount-in-words p {
+            margin: 0;
+            color: #144047;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .amount-in-words .words {
+            color: #2B8E38;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .signature-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid #EDEDED;
+        }
+
+        .signature-box {
+            text-align: center;
+        }
+
+        .signature-box p {
+            color: #666666;
+            font-weight: 600;
+            margin-bottom: 60px;
+        }
+
+        .signature-line {
+            border-top: 2px solid #144047;
+            padding-top: 10px;
+            color: #144047;
+            font-weight: 700;
+        }
+
+        .receipt-footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #EDEDED;
+            color: #666666;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .receipt-footer .company-info {
+            margin-bottom: 10px;
+        }
+
+        .receipt-footer .company-info strong {
+            color: #2B8E38;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 40px 0 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #2B8E38;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #237a2f;
+            box-shadow: 0 6px 16px rgba(43, 142, 56, 0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            color: #2B8E38;
+            padding: 15px 40px;
+            border: 2px solid #2B8E38;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #2B8E38;
+            color: white;
+            box-shadow: 0 6px 16px rgba(43, 142, 56, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media print {
+
+            .admin-header,
+            .back-link,
+            .action-buttons {
+                display: none !important;
+            }
+
+            .receipt-container {
+                box-shadow: none;
+                padding: 20px;
+            }
+
+            body {
+                background: white !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .receipt-container {
+                padding: 30px 20px;
+            }
+
+            .receipt-title {
+                font-size: 28px;
+            }
+
+            .signature-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .admin-header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .admin-nav {
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="page-template-default page theme-paroti">
+    <div class="paroti-page-loading"></div>
+
+    <div class="wrapper-page">
+        <!-- Admin Header (hidden on print) -->
+        <header class="admin-header">
+            <div class="container">
+                <h1>AGEF - Administration</h1>
+                <nav class="admin-nav">
+                    <a href="admin-gestion-clients.html">Gestion des clients</a>
+                    <a href="../index.html">Tableau de bord</a>
+                    <a href="#" onclick="logout()">Déconnexion</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div id="page-content" style="background-color: #F8F9FA; min-height: calc(100vh - 80px); padding: 20px 15px;">
+            <div class="container">
+                <a href="#" id="backLink" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour au profil
+                </a>
+
+                <!-- Action Buttons (hidden on print) -->
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="window.print()">
+                        <i class="fas fa-print"></i>
+                        Imprimer le reçu
+                    </button>
+                    <button class="btn-secondary" onclick="downloadPDF()">
+                        <i class="fas fa-download"></i>
+                        Télécharger PDF
+                    </button>
+                    <button class="btn-secondary" onclick="emailReceipt()">
+                        <i class="fas fa-envelope"></i>
+                        Envoyer par email
+                    </button>
+                </div>
+
+                <!-- Receipt -->
+                <div class="receipt-container">
+                    <!-- Header -->
+                    <div class="receipt-header">
+                        <div class="receipt-title">REÇU DE PAIEMENT</div>
+                        <div class="receipt-number">N° <span id="receiptNumber">AGEF-2024-0001</span></div>
+                        <div class="receipt-date">Date d'émission: <span id="issueDate">23 Novembre 2024</span></div>
+                    </div>
+
+                    <!-- Client Information -->
+                    <div class="info-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-user"></i> Informations du client
+                        </h3>
+                        <div class="info-box">
+                            <div class="info-row">
+                                <span class="info-label">Nom complet:</span>
+                                <span class="info-value" id="clientName">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Type:</span>
+                                <span class="info-value" id="clientType">Personne physique</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Téléphone:</span>
+                                <span class="info-value" id="phone">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Email:</span>
+                                <span class="info-value" id="email">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Property Information -->
+                    <div class="info-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-map-marked-alt"></i> Informations de la propriété
+                        </h3>
+                        <div class="info-box">
+                            <div class="info-row">
+                                <span class="info-label">Type de vente:</span>
+                                <span class="info-value" id="saleType">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Localisation:</span>
+                                <span class="info-value" id="location">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Référence parcelle:</span>
+                                <span class="info-value" id="parcelRef">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Superficie:</span>
+                                <span class="info-value" id="area">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Details -->
+                    <div class="info-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-money-bill-wave"></i> Détails du paiement
+                        </h3>
+
+                        <table class="payment-table">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th style="text-align: right;">Montant</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Prix total de la parcelle</td>
+                                    <td style="text-align: right;" id="totalPrice">-</td>
+                                </tr>
+                                <tr>
+                                    <td>Acompte versé (10%)</td>
+                                    <td style="text-align: right;" id="deposit">-</td>
+                                </tr>
+                                <tr>
+                                    <td>Reste à payer</td>
+                                    <td style="text-align: right;" id="remaining">-</td>
+                                </tr>
+                                <tr class="total-row">
+                                    <td>MONTANT PAYÉ</td>
+                                    <td style="text-align: right;" id="amountPaid">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="info-box" style="margin-top: 20px;">
+                            <div class="info-row">
+                                <span class="info-label">Mode de paiement:</span>
+                                <span class="info-value" id="paymentMethod">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Date de paiement:</span>
+                                <span class="info-value" id="paymentDate">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Référence de transaction:</span>
+                                <span class="info-value" id="transactionRef">-</span>
+                            </div>
+                        </div>
+
+                        <div class="amount-in-words">
+                            <p>Montant en lettres:</p>
+                            <p class="words" id="amountInWords">-</p>
+                        </div>
+                    </div>
+
+                    <!-- Signatures -->
+                    <div class="signature-section">
+                        <div class="signature-box">
+                            <p>Le Client</p>
+                            <div class="signature-line">Signature et date</div>
+                        </div>
+                        <div class="signature-box">
+                            <p>L'Agent AGEF</p>
+                            <div class="signature-line">Signature et cachet</div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="receipt-footer">
+                        <div class="company-info">
+                            <strong>Agence de Gestion Foncière (AGEF)</strong><br>
+                            Ouagadougou, Burkina Faso<br>
+                            Tél: +226 XX XX XX XX | Email: contact@agef.bf<br>
+                            www.agef.bf
+                        </div>
+                        <div style="margin-top: 15px; font-style: italic;">
+                            Ce reçu est un document officiel et doit être conservé en lieu sûr.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/main.js"></script>
+
+    <script>
+        // Mock client data
+        const mockClients = {
+            1: {
+                id: 1,
+                name: "Ouattara Aboubacar Sidiki",
+                type: "Personne physique",
+                phone: "64755831",
+                email: "ouattara.sidiki@example.com",
+                saleType: "Vente de parcelles - Bindougousso",
+                location: "Bindougousso, Habitation Ordinaire (I.1)",
+                parcelRef: "A-01-01",
+                area: "250 m²",
+                price: "3 293 615 FCFA",
+                priceNumeric: 3293615,
+                deposit: "329 362 FCFA",
+                depositNumeric: 329362,
+                remaining: "2 964 253 FCFA",
+                paymentMethod: "Orange Money",
+                subscriptionDate: "15 Octobre 2024",
+                transactionRef: "OM20241015123456"
+            },
+            2: {
+                id: 2,
+                name: "KONFE ABOUBACAR",
+                type: "Personne physique",
+                phone: "75587796",
+                email: "konfe.aboubacar@example.com",
+                saleType: "Vente de parcelles - Bindougousso",
+                location: "Bindougousso, Habitation Ordinaire (I.1)",
+                parcelRef: "A-01-04",
+                area: "300 m²",
+                price: "4 582 500 FCFA",
+                priceNumeric: 4582500,
+                deposit: "458 250 FCFA",
+                depositNumeric: 458250,
+                remaining: "4 124 250 FCFA",
+                paymentMethod: "Wave",
+                subscriptionDate: "18 Octobre 2024",
+                transactionRef: "WV20241018987654"
+            },
+            3: {
+                id: 3,
+                name: "BONKOUNGOU ABOUBACAR",
+                type: "Personne physique",
+                phone: "+22665765379",
+                email: "bonkoungou@example.com",
+                saleType: "Vente de parcelles - Bindougousso",
+                location: "Bindougousso, Habitation Ordinaire (I.1)",
+                parcelRef: "A-01-04",
+                area: "300 m²",
+                price: "4 582 500 FCFA",
+                priceNumeric: 4582500,
+                deposit: "458 250 FCFA",
+                depositNumeric: 458250,
+                remaining: "4 124 250 FCFA",
+                paymentMethod: "Moov Money",
+                subscriptionDate: "20 Octobre 2024",
+                transactionRef: "MM20241020456789"
+            },
+            4: {
+                id: 4,
+                name: "DAO ABOUBACAR",
+                type: "Personne physique",
+                phone: "75405218",
+                email: "dao.aboubacar@example.com",
+                saleType: "Vente de parcelles - Bindougousso",
+                location: "Bindougousso, Habitation Ordinaire (I.1)",
+                parcelRef: "A-01-04",
+                area: "300 m²",
+                price: "4 582 500 FCFA",
+                priceNumeric: 4582500,
+                deposit: "458 250 FCFA",
+                depositNumeric: 458250,
+                remaining: "4 124 250 FCFA",
+                paymentMethod: "MTN Money",
+                subscriptionDate: "22 Octobre 2024",
+                transactionRef: "MTN20241022789012"
+            },
+            5: {
+                id: 5,
+                name: "TRAORE Aboubacar",
+                type: "Personne physique",
+                phone: "+22670574046",
+                email: "traore.aboubacar@example.com",
+                saleType: "Vente de parcelles - Bindougousso",
+                location: "Bindougousso, Habitation Ordinaire (I.1)",
+                parcelRef: "A-01-05",
+                area: "275 m²",
+                price: "3 555 500 FCFA",
+                priceNumeric: 3555500,
+                deposit: "355 550 FCFA",
+                depositNumeric: 355550,
+                remaining: "3 199 950 FCFA",
+                paymentMethod: "Orange Money",
+                subscriptionDate: "25 Octobre 2024",
+                transactionRef: "OM20241025345678"
+            }
+        };
+
+        // Number to words converter (French)
+        function numberToWords(num) {
+            // Simplified version - in production, use a proper library
+            const millions = Math.floor(num / 1000000);
+            const thousands = Math.floor((num % 1000000) / 1000);
+            const remainder = num % 1000;
+
+            let words = "";
+            if (millions > 0) words += millions + " million" + (millions > 1 ? "s" : "") + " ";
+            if (thousands > 0) words += thousands + " mille ";
+            if (remainder > 0) words += remainder + " ";
+
+            return words.trim() + " francs CFA";
+        }
+
+        // Load receipt data
+        function loadReceiptData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const clientId = urlParams.get('client');
+
+            if (!clientId || !mockClients[clientId]) {
+                alert('Client non trouvé');
+                window.location.href = 'admin-gestion-clients.html';
+                return;
+            }
+
+            const client = mockClients[clientId];
+
+            // Update back link
+            document.getElementById('backLink').href = `admin-profile-client.html?client=${clientId}`;
+
+            // Generate receipt number
+            const receiptNumber = `AGEF-2024-${String(client.id).padStart(4, '0')}`;
+            document.getElementById('receiptNumber').textContent = receiptNumber;
+
+            // Set current date
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('fr-FR', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            document.getElementById('issueDate').textContent = dateStr;
+
+            // Update client information
+            document.getElementById('clientName').textContent = client.name;
+            document.getElementById('clientType').textContent = client.type;
+            document.getElementById('phone').textContent = client.phone;
+            document.getElementById('email').textContent = client.email;
+
+            // Update property information
+            document.getElementById('saleType').textContent = client.saleType;
+            document.getElementById('location').textContent = client.location;
+            document.getElementById('parcelRef').textContent = client.parcelRef;
+            document.getElementById('area').textContent = client.area;
+
+            // Update payment details
+            document.getElementById('totalPrice').textContent = client.price;
+            document.getElementById('deposit').textContent = client.deposit;
+            document.getElementById('remaining').textContent = client.remaining;
+            document.getElementById('amountPaid').textContent = client.deposit;
+            document.getElementById('paymentMethod').textContent = client.paymentMethod;
+            document.getElementById('paymentDate').textContent = client.subscriptionDate;
+            document.getElementById('transactionRef').textContent = client.transactionRef;
+
+            // Convert amount to words
+            const amountInWords = numberToWords(client.depositNumeric);
+            document.getElementById('amountInWords').textContent = amountInWords.charAt(0).toUpperCase() + amountInWords.slice(1);
+        }
+
+        function downloadPDF() {
+            alert('La fonctionnalité de téléchargement PDF sera bientôt disponible.\nPour le moment, veuillez utiliser l\'option "Imprimer" puis "Enregistrer au format PDF".');
+        }
+
+        function emailReceipt() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const clientId = urlParams.get('client');
+            const client = mockClients[clientId];
+
+            if (confirm(`Envoyer le reçu par email à ${client.email} ?`)) {
+                alert('Le reçu a été envoyé avec succès !');
+            }
+        }
+
+        function logout() {
+            if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Load data when page loads
+        window.addEventListener('load', loadReceiptData);
+    </script>
+</body>
+
+</html>

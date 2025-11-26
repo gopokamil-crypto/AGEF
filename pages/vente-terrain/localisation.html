@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souscription - Étape 1 : Localisation</title>
+
+    <!-- CSS Files -->
+    <link rel='stylesheet' href='../../css/bootstrap.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel='stylesheet' href='../../css/paroti-style.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../../css/custom-flow.css' type='text/css' media='all' />
+
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .header-simple {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .logo-img {
+            max-height: 60px;
+        }
+
+        .location-info .text-muted div {
+            margin-bottom: 5px;
+            /* Center text */
+            justify-content: center;
+        }
+
+        .location-info .text-muted i {
+            width: 20px;
+            color: #2B8E38;
+            margin-right: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Simple Header -->
+    <header class="header-simple">
+        <div class="container">
+            <div class="text-center">
+                <a href="../../index.html">
+                    <img src="../../images/logo.png" alt="AGEF" class="logo-img">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Breadcrumbs -->
+        <div class="flow-breadcrumbs">
+            <div class="breadcrumb-step active">
+                <div class="step-circle">1</div>
+                <div class="step-label">Localisation</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">2</div>
+                <div class="step-label">Conditions</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">3</div>
+                <div class="step-label">Identité</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">4</div>
+                <div class="step-label">Lots</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">5</div>
+                <div class="step-label">Résumé</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">6</div>
+                <div class="step-label">Paiement</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="text-center mb-5">
+                    <h2 class="mb-3">Choisissez votre ville</h2>
+                    <p class="text-muted">Sélectionnez la localité où vous souhaitez acquérir un terrain.</p>
+                </div>
+
+                <div class="row">
+                    <!-- Songon -->
+                    <div class="col-md-4 mb-4">
+                        <div class="location-card"
+                            onclick="selectLocation('Songon', '../images/2025/03/PUB-TERRAIN-SONGON-1024x726.jpg')">
+                            <img src="../../images/2025/03/PUB-TERRAIN-SONGON-1024x726.jpg" alt="Songon"
+                                class="location-img">
+                            <div class="location-info">
+                                <h3 class="location-name">Songon Ayewahi</h3>
+                                <div class="text-muted mb-3" style="font-size: 0.9rem; text-align: center;">
+                                    <div>- Songon, Abidjan</div>
+                                    <div>- À partir de 300 m²</div>
+                                    <div>- Terrain viabilisé et titré</div>
+                                    <div>- Voies d'accès aménagées</div>
+                                </div>
+                                <button class="btn btn-success w-100"
+                                    style="background-color: #2B8E38; border: none; padding: 10px; font-weight: 600;">Sélectionner</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Anyama -->
+                    <div class="col-md-4 mb-4">
+                        <div class="location-card"
+                            onclick="selectLocation('Anyama', '../images/2025/03/1-1024x682.jpg')">
+                            <img src="../../images/2025/03/1-1024x682.jpg" alt="Anyama" class="location-img">
+                            <div class="location-info">
+                                <h3 class="location-name">Route d'Anyama</h3>
+                                <div class="text-muted mb-3" style="font-size: 0.9rem; text-align: center;">
+                                    <div>- Anyama, Abidjan</div>
+                                    <div>- À partir de 400 m²</div>
+                                    <div>- Terrain viabilisé et titré</div>
+                                    <div>- Électricité disponible</div>
+                                </div>
+                                <button class="btn btn-success w-100"
+                                    style="background-color: #2B8E38; border: none; padding: 10px; font-weight: 600;">Sélectionner</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Yamoussoukro -->
+                    <div class="col-md-4 mb-4">
+                        <div class="location-card"
+                            onclick="selectLocation('Yamoussoukro', '../images/2025/03/bienvenue-5.jpg')">
+                            <img src="../../images/2025/03/bienvenue-5.jpg" alt="Yamoussoukro" class="location-img">
+                            <div class="location-info">
+                                <h3 class="location-name">Yamoussoukro</h3>
+                                <div class="text-muted mb-3" style="font-size: 0.9rem; text-align: center;">
+                                    <div>- Yamoussoukro</div>
+                                    <div>- À partir de 500 m²</div>
+                                    <div>- Terrain viabilisé et titré</div>
+                                    <div>- Eau et électricité</div>
+                                </div>
+                                <button class="btn btn-success w-100"
+                                    style="background-color: #2B8E38; border: none; padding: 10px; font-weight: 600;">Sélectionner</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Korhogo -->
+                    <div class="col-md-4 mb-4">
+                        <div class="location-card"
+                            onclick="selectLocation('Korhogo', '../images/2025/03/1-1024x682.jpg')">
+                            <img src="../../images/2025/03/1-1024x682.jpg" alt="Korhogo" class="location-img">
+                            <div class="location-info">
+                                <h3 class="location-name">Korhogo</h3>
+                                <div class="text-muted mb-3" style="font-size: 0.9rem; text-align: center;">
+                                    <div>- Korhogo, Nord</div>
+                                    <div>- À partir de 600 m²</div>
+                                    <div>- Terrain viabilisé et titré</div>
+                                    <div>- Zone résidentielle</div>
+                                </div>
+                                <button class="btn btn-success w-100"
+                                    style="background-color: #2B8E38; border: none; padding: 10px; font-weight: 600;">Sélectionner</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Abengourou -->
+                    <div class="col-md-4 mb-4">
+                        <div class="location-card"
+                            onclick="selectLocation('Abengourou', '../images/2025/03/bienvenue-5.jpg')">
+                            <img src="../../images/2025/03/bienvenue-5.jpg" alt="Abengourou" class="location-img">
+                            <div class="location-info">
+                                <h3 class="location-name">Abengourou</h3>
+                                <div class="text-muted mb-3" style="font-size: 0.9rem; text-align: center;">
+                                    <div>- Abengourou, Est</div>
+                                    <div>- À partir de 400 m²</div>
+                                    <div>- Terrain viabilisé et titré</div>
+                                    <div>- Environnement calme</div>
+                                </div>
+                                <button class="btn btn-success w-100"
+                                    style="background-color: #2B8E38; border: none; padding: 10px; font-weight: 600;">Sélectionner</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bouaké -->
+                    <div class="col-md-4 mb-4">
+                        <div class="location-card"
+                            onclick="selectLocation('Bouaké', '../images/2025/03/1-1024x682.jpg')">
+                            <img src="../../images/2025/03/1-1024x682.jpg" alt="Bouaké" class="location-img">
+                            <div class="location-info">
+                                <h3 class="location-name">Bouaké</h3>
+                                <div class="text-muted mb-3" style="font-size: 0.9rem; text-align: center;">
+                                    <div>- Bouaké, Centre</div>
+                                    <div>- À partir de 500 m²</div>
+                                    <div>- Terrain viabilisé et titré</div>
+                                    <div>- Zone commerciale</div>
+                                </div>
+                                <button class="btn btn-success w-100"
+                                    style="background-color: #2B8E38; border: none; padding: 10px; font-weight: 600;">Sélectionner</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-nav">
+                    <a href="../vente-terrain.html" class="btn-back">Retour</a>
+                    <!-- Next button is hidden until selection, or we just auto-redirect on click -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectLocation(name, image) {
+            // Save to sessionStorage
+            sessionStorage.setItem('agef_location_name', name);
+            sessionStorage.setItem('agef_location_image', image);
+
+            // Visual feedback (optional, since we redirect immediately)
+            // Redirect to next step
+            window.location.href = 'conditions.html';
+        }
+
+        // Clear session if starting fresh (optional, but good practice)
+        // sessionStorage.clear(); 
+    </script>
+</body>
+
+</html>

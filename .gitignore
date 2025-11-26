@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# PDFs (if you don't want to commit PDFs)
+*.pdf
+
+# Node modules (if you add Node.js later)
+node_modules/
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.log

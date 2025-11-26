@@ -1,0 +1,200 @@
+						</ul>
+						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-ca0a23e" data-id="ca0a23e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-bffbad0 elementor-widget elementor-widget-heading" data-id="bffbad0" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Contacts</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-351f148 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="351f148" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="mailto:info@agef.ci">
+
+												<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class=" flaticon-email-1"></i>						</span>
+										<span class="elementor-icon-list-text">info@agef.ci</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="tel:+2252722409700">
+
+												<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-phone"></i>						</span>
+										<span class="elementor-icon-list-text">(+225) 27 22 40 97 00</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-d01ae78 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="d01ae78" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-13d26d1" data-id="13d26d1" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-606dad3 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="606dad3" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-c051df9" data-id="c051df9" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-33680e7 elementor-widget elementor-widget-text-editor" data-id="33680e7" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+									<div>© 2025 Copyrights par AGEF. Tous droits réservés</div>								</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-3392b07" data-id="3392b07" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-716da3e e-grid-align-left e-grid-align-mobile-left elementor-widget__width-auto elementor-shape-rounded elementor-grid-0 elementor-widget elementor-widget-social-icons" data-id="716da3e" data-element_type="widget" data-widget_type="social-icons.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-social-icons-wrapper elementor-grid" role="list">
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-facebook elementor-repeater-item-b32881d" href="https://www.facebook.com/225agef.ci" target="_blank">
+						<span class="elementor-screen-only">Facebook</span>
+						<i class="fab fa-facebook"></i>					</a>
+				</span>
+							<span class="elementor-grid-item" role="listitem">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-linkedin elementor-repeater-item-1450104" href="https://www.linkedin.com/company/agef-agence-de-gestion-foncière-ci/" target="_blank">
+						<span class="elementor-screen-only">Linkedin</span>
+						<i class="fab fa-linkedin"></i>					</a>
+				</span>
+					</div>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		</div>
+			
+
+	</footer>
+	
+	<div id="gva-overlay"></div>
+	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+	   <defs>
+	      <filter id="blur-filter">
+	         <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+	      </filter>
+	    </defs>
+	</svg>
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/paroti_child\/*","\/wp-content\/themes\/paroti\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+		<script>
+		( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+		</script>
+		<script> /* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","all_selected_text":"All items on this page were selected. ","select_all_link":"Select all pages","clear_selection":"Clear Selection.","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"],"dayNamesShort":["dim","lun","mar","mer","jeu","ven","sam"],"dayNamesMin":["D","L","M","M","J","V","S"],"monthNames":["janvier","f\u00e9vrier","mars","avril","mai","juin","juillet","ao\u00fbt","septembre","octobre","novembre","d\u00e9cembre"],"monthNamesShort":["janvier","f\u00e9vrier","mars","avril","mai","juin","juillet","ao\u00fbt","septembre","octobre","novembre","d\u00e9cembre"],"monthNamesMin":["Jan","F\u00e9v","Mar","Avr","Mai","Juin","Juil","Ao\u00fbt","Sep","Oct","Nov","D\u00e9c"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done","today":"Today","clear":"Clear"}};/* ]]> */ </script>			<script>
+				const lazyloadRunObserver = () => {
+					const lazyloadBackgrounds = document.querySelectorAll( `.e-con.e-parent:not(.e-lazyloaded)` );
+					const lazyloadBackgroundObserver = new IntersectionObserver( ( entries ) => {
+						entries.forEach( ( entry ) => {
+							if ( entry.isIntersecting ) {
+								let lazyloadBackground = entry.target;
+								if( lazyloadBackground ) {
+									lazyloadBackground.classList.add( 'e-lazyloaded' );
+								}
+								lazyloadBackgroundObserver.unobserve( entry.target );
+							}
+						});
+					}, { rootMargin: '200px 0px 200px 0px' } );
+					lazyloadBackgrounds.forEach( ( lazyloadBackground ) => {
+						lazyloadBackgroundObserver.observe( lazyloadBackground );
+					} );
+				};
+				const events = [
+					'DOMContentLoaded',
+					'elementor/lazyload/observe',
+				];
+				events.forEach( ( event ) => {
+					document.addEventListener( event, lazyloadRunObserver );
+				} );
+			</script>
+				<script type='text/javascript'>
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+	<link rel='stylesheet' id='wc-blocks-style-css' href='../css/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-9.8.5' type='text/css' media='all' />
+<link rel='stylesheet' id='e-apple-webkit-css' href='../css/elementor/assets/css/conditionals/apple-webkit.min.css?ver=3.29.0' type='text/css' media='all' />
+<link rel='stylesheet' id='widget-heading-css' href='../css/elementor/assets/css/widget-heading.min.css?ver=3.29.0' type='text/css' media='all' />
+<script type="text/javascript" src="../js/dist/hooks.min.js?ver=4d63a3d491d11ffd8ac6" id="wp-hooks-js"></script>
+<script type="text/javascript" src="../js/dist/i18n.min.js?ver=5e580eb46a90c2b997e6" id="wp-i18n-js"></script>
+<script type="text/javascript" id="wp-i18n-js-after">
+/* <![CDATA[ */
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+/* ]]> */
+</script>
+<script type="text/javascript" src="../css/contact-form-7/includes/swv/js/index.js?ver=6.0.6" id="swv-js"></script>
+<script type="text/javascript" id="contact-form-7-js-translations">
+/* <![CDATA[ */
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "contact-form-7", {"translation-revision-date":"2025-02-06 12:02:14+0000","generator":"GlotPress\/4.0.1","domain":"messages","locale_data":{"messages":{"":{"domain":"messages","plural-forms":"nplurals=2; plural=n > 1;","lang":"fr"},"This contact form is placed in the wrong place.":["Ce formulaire de contact est plac\u00e9 dans un mauvais endroit."],"Error:":["Erreur\u00a0:"]}},"comment":{"reference":"includes\/js\/index.js"}} );
+/* ]]> */
+</script>
+<script type="text/javascript" id="contact-form-7-js-before">
+/* <![CDATA[ */
+var wpcf7 = {
+    "api": {
+        "root": "https:\/\/www.agef.ci\/wp-json\/",
+        "namespace": "contact-form-7\/v1"
+    }
+};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../css/contact-form-7/includes/js/index.js?ver=6.0.6" id="contact-form-7-js"></script>
+<script type="text/javascript" src="../css/paroti-themer/assets/js/main.js" id="gavias-themer-js"></script>
+<script type="text/javascript" src="../css/woocommerce/assets/js/sourcebuster/sourcebuster.min.js?ver=9.8.5" id="sourcebuster-js-js"></script>
+<script type="text/javascript" id="wc-order-attribution-js-extra">
+/* <![CDATA[ */
+var wc_order_attribution = {"params":{"lifetime":1.0e-5,"session":30,"base64":false,"ajaxurl":"https:\/\/www.agef.ci\/wp-admin\/admin-ajax.php","prefix":"wc_order_attribution_","allowTracking":true},"fields":{"source_type":"current.typ","referrer":"current_add.rf","utm_campaign":"current.cmp","utm_source":"current.src","utm_medium":"current.mdm","utm_content":"current.cnt","utm_id":"current.id","utm_term":"current.trm","utm_source_platform":"current.plt","utm_creative_format":"current.fmt","utm_marketing_tactic":"current.tct","session_entry":"current_add.ep","session_start_time":"current_add.fd","session_pages":"session.pgs","session_count":"udata.vst","user_agent":"udata.uag"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../css/woocommerce/assets/js/frontend/order-attribution.min.js?ver=9.8.5" id="wc-order-attribution-js"></script>
+<script type="text/javascript" src="../css/paroti-themer/elementor/assets/libs/typed.min.js?ver=1.0.0" id="typed-js"></script>
+<script type="text/javascript" src="../css/paroti-themer/elementor/assets/main.js?ver=1.0.0" id="gavias.elements-js"></script>
+<script type="text/javascript" src="../css/elementor/assets/js/webpack.runtime.min.js?ver=3.29.0" id="elementor-webpack-runtime-js"></script>
+<script type="text/javascript" src="../css/elementor/assets/js/frontend-modules.min.js?ver=3.29.0" id="elementor-frontend-modules-js"></script>
+<script type="text/javascript" src="../js/jquery/ui/core.min.js?ver=1.13.3" id="jquery-ui-core-js"></script>
+<script type="text/javascript" id="elementor-frontend-js-before">
+/* <![CDATA[ */
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Partager sur Facebook","shareOnTwitter":"Partager sur Twitter","pinIt":"L\u2019\u00e9pingler","download":"T\u00e9l\u00e9charger","downloadImage":"T\u00e9l\u00e9charger une image","fullscreen":"Plein \u00e9cran","zoom":"Zoom","share":"Partager","playVideo":"Lire la vid\u00e9o","previous":"Pr\u00e9c\u00e9dent","next":"Suivant","close":"Fermer","a11yCarouselPrevSlideMessage":"Diapositive pr\u00e9c\u00e9dente","a11yCarouselNextSlideMessage":"Diapositive suivante","a11yCarouselFirstSlideMessage":"Ceci est la premi\u00e8re diapositive","a11yCarouselLastSlideMessage":"Ceci est la derni\u00e8re diapositive","a11yCarouselPaginationBulletMessage":"Aller \u00e0 la diapositive"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Portrait mobile","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Paysage","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablette en mode portrait","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablette en mode paysage","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Portable","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"\u00c9cran large","value":2400,"default_value":2400,"direction":"min","is_enabled":false}},
+"hasCustomBreakpoints":false},"version":"3.29.0","is_static":false,"experimentalFeatures":{"e_local_google_fonts":true,"theme_builder_v2":true,"editor_v2":true,"e_element_cache":true,"home_screen":true,"launchpad-checklist":true,"cloud-library":true,"e_opt_in_v4_page":true},"urls":{"assets":"https:\/\/www.agef.ci\/wp-content\/plugins\/elementor\/assets\/","ajaxurl":"https:\/\/www.agef.ci\/wp-admin\/admin-ajax.php","uploadUrl":"https:\/\/www.agef.ci\/wp-content\/uploads"},"nonces":{"floatingButtonsClickTracking":"ba3559d424"},"swiperClass":"swiper","settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description","woocommerce_notices_elements":[]},"post":{"id":1577,"title":"About%20-%20Agence%20de%20Gestion%20Fonci%C3%A8re","excerpt":"","featuredImage":false}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../css/elementor/assets/js/frontend.min.js?ver=3.29.0" id="elementor-frontend-js"></script>
+<script type="text/javascript" src="../css/elementor/assets/lib/swiper/v8/swiper.min.js?ver=8.4.5" id="swiper-js"></script>
+<script type="text/javascript" src="../css/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.28.2" id="elementor-pro-webpack-runtime-js"></script>
+<script type="text/javascript" id="elementor-pro-frontend-js-before">
+/* <![CDATA[ */
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/www.agef.ci\/wp-admin\/admin-ajax.php","nonce":"5352cc922a","urls":{"assets":"https:\/\/www.agef.ci\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/www.agef.ci\/wp-json\/"},"settings":{"lazy_load_background_images":true},"popup":{"hasPopUps":false},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"},"x-twitter":{"title":"X"},"threads":{"title":"Threads"}},
+"woocommerce":{"menu_cart":{"cart_page_url":"https:\/\/www.agef.ci\/cart\/","checkout_page_url":"https:\/\/www.agef.ci\/checkout\/","fragments_nonce":"f9405d9999"}},
+"facebook_sdk":{"lang":"fr_FR","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/www.agef.ci\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../css/elementor-pro/assets/js/frontend.min.js?ver=3.28.2" id="elementor-pro-frontend-js"></script>
+<script type="text/javascript" src="../css/elementor-pro/assets/js/elements-handlers.min.js?ver=3.28.2" id="pro-elements-handlers-js"></script>
+<link rel="stylesheet" type="text/css" href="../css/paroti-themer/assets/icons/style.css">
+</body>
+</html><!-- WP Fastest Cache file was created in 1.501 seconds, on July 24, 2025 @ 3:55 pm -->

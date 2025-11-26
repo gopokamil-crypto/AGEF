@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souscription - Étape 3 : Identité</title>
+
+    <!-- CSS Files -->
+    <link rel='stylesheet' href='../../css/bootstrap.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel='stylesheet' href='../../css/paroti-style.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../../css/custom-flow.css' type='text/css' media='all' />
+
+    <!-- Supabase SDK - Load First! -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- AGEF Database (Cloud) -->
+    <script src="../../js/database-supabase.js"></script>
+
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .header-simple {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .logo-img {
+            max-height: 60px;
+        }
+
+        .form-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Simple Header -->
+    <header class="header-simple">
+        <div class="container">
+            <div class="text-center">
+                <a href="../../index.html">
+                    <img src="../../images/logo.png" alt="AGEF" class="logo-img">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Breadcrumbs -->
+        <div class="flow-breadcrumbs">
+            <div class="breadcrumb-step completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-label">Localisation</div>
+            </div>
+            <div class="step-connector completed"></div>
+            <div class="breadcrumb-step completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-label">Conditions</div>
+            </div>
+            <div class="step-connector completed"></div>
+            <div class="breadcrumb-step active">
+                <div class="step-circle">3</div>
+                <div class="step-label">Identité</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">4</div>
+                <div class="step-label">Lots</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">5</div>
+                <div class="step-label">Résumé</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">6</div>
+                <div class="step-label">Paiement</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="text-center mb-5">
+                    <h2 class="mb-3">Vos Informations Personnelles</h2>
+                    <p class="text-muted">Remplissez ce formulaire pour créer votre dossier acquéreur.</p>
+                </div>
+
+                <div class="form-box">
+                    <form id="identityForm">
+                        <div class="form-group">
+                            <label class="form-label">Nom & Prénoms</label>
+                            <input type="text" class="form-control" id="fullName" placeholder="Ex: KOUASSI Jean-Pierre"
+                                required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Genre</label>
+                                    <select class="form-control" id="gender" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="Masculin">Masculin</option>
+                                        <option value="Féminin">Féminin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Date de Naissance</label>
+                                    <input type="date" class="form-control" id="dateOfBirth" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Téléphone (WhatsApp)</label>
+                                    <input type="tel" class="form-control" id="phone" placeholder="Ex: 0707123456"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Profession</label>
+                                    <input type="text" class="form-control" id="profession" placeholder="Ex: Commerçant"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Nationalité</label>
+                                    <select class="form-control" id="nationality" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                                        <option value="Ghana">Ghana</option>
+                                        <option value="Nigeria">Nigeria</option>
+                                        <option value="Sénégal">Sénégal</option>
+                                        <option value="Mali">Mali</option>
+                                        <option value="Burkina Faso">Burkina Faso</option>
+                                        <option value="Autre">Autre</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Type de Document</label>
+                                    <select class="form-control" id="documentType" required>
+                                        <option value="">Sélectionner...</option>
+                                        <option value="CNI">Carte Nationale d'Identité (CNI)</option>
+                                        <option value="Passeport">Passeport</option>
+                                        <option value="Permis de conduire">Permis de conduire</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Numéro du Document</label>
+                            <input type="text" class="form-control" id="documentNumber" placeholder="Ex: C00123456789"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Résidence <span
+                                    style="color: #999; font-weight: normal;">(Optionnel)</span></label>
+                            <input type="text" class="form-control" id="residence" placeholder="Ex: Cocody, Abidjan">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="flow-nav">
+                    <a href="conditions.html" class="btn-back">Retour</a>
+                    <button type="button" class="btn-next" onclick="saveAndNext()">VOIR LES LOTS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for DOM content to be loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check prev steps
+            if (!sessionStorage.getItem('agef_terms_accepted')) {
+                // window.location.href = 'conditions.html'; // Commented out for easier testing
+            }
+
+            // Pre-fill if data exists
+            if (sessionStorage.getItem('agef_user_name')) {
+                document.getElementById('fullName').value = sessionStorage.getItem('agef_user_name');
+                document.getElementById('gender').value = sessionStorage.getItem('agef_user_gender') || '';
+                document.getElementById('dateOfBirth').value = sessionStorage.getItem('agef_user_dateOfBirth');
+                document.getElementById('phone').value = sessionStorage.getItem('agef_user_phone');
+                document.getElementById('profession').value = sessionStorage.getItem('agef_user_profession');
+                document.getElementById('nationality').value = sessionStorage.getItem('agef_user_nationality');
+                document.getElementById('documentType').value = sessionStorage.getItem('agef_user_documentType') || '';
+                document.getElementById('documentNumber').value = sessionStorage.getItem('agef_user_documentNumber');
+                document.getElementById('residence').value = sessionStorage.getItem('agef_user_residence') || '';
+            }
+        });
+
+        async function saveAndNext() {
+            const form = document.getElementById('identityForm');
+            if (form.checkValidity()) {
+                // Save to sessionStorage
+                sessionStorage.setItem('agef_user_name', document.getElementById('fullName').value);
+                sessionStorage.setItem('agef_user_gender', document.getElementById('gender').value);
+                sessionStorage.setItem('agef_user_dateOfBirth', document.getElementById('dateOfBirth').value);
+                sessionStorage.setItem('agef_user_phone', document.getElementById('phone').value);
+                sessionStorage.setItem('agef_user_profession', document.getElementById('profession').value);
+                sessionStorage.setItem('agef_user_nationality', document.getElementById('nationality').value);
+                sessionStorage.setItem('agef_user_documentType', document.getElementById('documentType').value);
+                sessionStorage.setItem('agef_user_documentNumber', document.getElementById('documentNumber').value);
+                sessionStorage.setItem('agef_user_residence', document.getElementById('residence').value);
+
+                // Check if database is ready
+                if (typeof AGEFDatabase === 'undefined') {
+                    console.error('❌ AGEFDatabase is undefined! Scripts might not be loaded.');
+                    alert('Erreur: La connexion à la base de données n\'est pas prête. Veuillez rafraîchir la page.');
+                    return;
+                }
+
+                // Save to database immediately
+                try {
+                    console.log('💾 Saving user to database...');
+
+                    const clientData = {
+                        fullName: document.getElementById('fullName').value,
+                        gender: document.getElementById('gender').value,
+                        dateOfBirth: document.getElementById('dateOfBirth').value,
+                        phone: document.getElementById('phone').value,
+                        profession: document.getElementById('profession').value,
+                        nationality: document.getElementById('nationality').value,
+                        documentType: document.getElementById('documentType').value,
+                        documentNumber: document.getElementById('documentNumber').value,
+                        residence: document.getElementById('residence').value,
+                        location: sessionStorage.getItem('agef_location_name') || 'Non défini',
+                        parcelType: 'Habitation Ordinaire (I.1)', // Default, will be updated later
+                        parcelArea: '300 m²', // Default, will be updated when lot selected
+                        parcelRef: 'En attente', // Will be updated when lot selected
+                        paymentMethod: 'Non défini', // Will be updated on payment page
+                        paymentStatus: 'pending',
+                        termsAccepted: sessionStorage.getItem('agef_terms_accepted') === 'true'
+                    };
+
+                    const savedClient = await AGEFDatabase.addClient(clientData);
+                    console.log('✅ User saved with ID:', savedClient.id);
+
+                    // Store client ID for future updates
+                    sessionStorage.setItem('agef_client_id', savedClient.id);
+
+                    // Navigate to next page
+                    window.location.href = 'lots.html';
+
+                } catch (error) {
+                    console.error('❌ Error saving user:', error);
+                    alert('Une erreur est survenue lors de la sauvegarde de vos données. Veuillez réessayer.');
+                }
+            } else {
+                form.reportValidity();
+            }
+        }
+    </script>
+</body>
+
+</html>

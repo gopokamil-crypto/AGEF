@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr-FR" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profil Client - Administration - AGEF</title>
+
+    <!-- CSS Links -->
+    <link rel='stylesheet' href='../css/bootstrap.css' />
+    <link rel='stylesheet' href='../css/all.min.css' />
+    <link rel='stylesheet' href='../css/line-awesome.min.css' />
+    <link rel='stylesheet' href='../css/paroti-style.css' />
+    <link rel='stylesheet' href='../css/template.css' />
+    <link rel='stylesheet' href='../css/paroti-child-style.css' />
+    <link rel='stylesheet' href='../css/frontend.min.css' />
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap'
+        rel='stylesheet' />
+
+    <style>
+        .admin-header {
+            background-color: #2B8E38;
+            padding: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .admin-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+
+        .admin-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #2B8E38;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 30px 0 20px 0;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #237a2f;
+        }
+
+        .profile-container {
+            max-width: 1000px;
+            margin: 0 auto 40px auto;
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            border-bottom: 2px solid #EDEDED;
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+        }
+
+        .profile-header h2 {
+            color: #144047;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .profile-header .client-id {
+            color: #666666;
+            font-size: 14px;
+        }
+
+        .status-banner {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-left: 4px solid #F57C00;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .status-banner.paid {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left-color: #2B8E38;
+        }
+
+        .status-banner .icon {
+            font-size: 32px;
+            color: #F57C00;
+        }
+
+        .status-banner.paid .icon {
+            color: #2B8E38;
+        }
+
+        .status-banner .content h3 {
+            margin: 0 0 5px 0;
+            color: #144047;
+            font-size: 18px;
+        }
+
+        .status-banner .content p {
+            margin: 0;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-section {
+            background: #F8F9FA;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .info-section h3 {
+            color: #2B8E38;
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #EDEDED;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #EDEDED;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #666666;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .info-value {
+            color: #144047;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .info-value.highlight {
+            color: #2B8E38;
+            font-size: 18px;
+        }
+
+        .full-width-section {
+            grid-column: 1 / -1;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #EDEDED;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #2B8E38;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #237a2f;
+            box-shadow: 0 6px 16px rgba(43, 142, 56, 0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            color: #2B8E38;
+            padding: 15px 40px;
+            border: 2px solid #2B8E38;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #2B8E38;
+            color: white;
+            box-shadow: 0 6px 16px rgba(43, 142, 56, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .document-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .document-list li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #144047;
+        }
+
+        .document-list li:before {
+            content: "−";
+            position: absolute;
+            left: 0;
+            color: #2B8E38;
+            font-weight: bold;
+        }
+
+        @media (max-width: 767px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .profile-container {
+                padding: 20px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .admin-header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .admin-nav {
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="page-template-default page theme-paroti">
+    <div class="paroti-page-loading"></div>
+
+    <div class="wrapper-page">
+        <!-- Admin Header -->
+        <header class="admin-header">
+            <div class="container">
+                <h1>AGEF - Administration</h1>
+                <nav class="admin-nav">
+                    <a href="admin-gestion-clients.html">Gestion des clients</a>
+                    <a href="../index.html">Tableau de bord</a>
+                    <a href="#" onclick="logout()">Déconnexion</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div id="page-content" style="background-color: #F8F9FA; min-height: calc(100vh - 80px); padding: 20px 15px;">
+            <div class="container">
+                <a href="admin-gestion-clients.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour à la recherche
+                </a>
+
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <h2 id="clientName">Chargement...</h2>
+                        <div class="client-id">ID Client: <span id="clientId">-</span></div>
+                    </div>
+
+                    <!-- Status Banner -->
+                    <div id="statusBanner" class="status-banner">
+                        <i class="fas fa-exclamation-circle icon"></i>
+                        <div class="content">
+                            <h3 id="statusTitle">Paiement en attente</h3>
+                            <p id="statusMessage">Le client n'a pas encore finalisé son paiement.</p>
+                        </div>
+                    </div>
+
+                    <!-- Information Grid -->
+                    <div class="info-grid">
+                        <!-- Personal Information -->
+                        <div class="info-section">
+                            <h3><i class="fas fa-user"></i> Informations personnelles</h3>
+                            <div class="info-row">
+                                <span class="info-label">Nom complet</span>
+                                <span class="info-value" id="fullName">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Type</span>
+                                <span class="info-value" id="clientType">Personne physique</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Téléphone</span>
+                                <span class="info-value" id="phone">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Email</span>
+                                <span class="info-value" id="email">-</span>
+                            </div>
+                        </div>
+
+                        <!-- Parcel Information -->
+                        <div class="info-section">
+                            <h3><i class="fas fa-map-marked-alt"></i> Informations parcelle</h3>
+                            <div class="info-row">
+                                <span class="info-label">Type de vente</span>
+                                <span class="info-value" id="saleType">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Localisation</span>
+                                <span class="info-value" id="location">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Référence</span>
+                                <span class="info-value" id="parcelRef">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Superficie</span>
+                                <span class="info-value" id="area">-</span>
+                            </div>
+                        </div>
+
+                        <!-- Payment Information -->
+                        <div class="info-section">
+                            <h3><i class="fas fa-money-bill-wave"></i> Informations financières</h3>
+                            <div class="info-row">
+                                <span class="info-label">Prix total</span>
+                                <span class="info-value highlight" id="totalPrice">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Acompte versé</span>
+                                <span class="info-value" id="deposit">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Reste à payer</span>
+                                <span class="info-value" id="remaining">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Mode de paiement</span>
+                                <span class="info-value" id="paymentMethod">-</span>
+                            </div>
+                        </div>
+
+                        <!-- Documents -->
+                        <div class="info-section">
+                            <h3><i class="fas fa-file-alt"></i> Documents requis</h3>
+                            <ul class="document-list">
+                                <li>Acte notarié</li>
+                                <li>Certificat de conformité urbanistique</li>
+                                <li>Certificat de localisation</li>
+                                <li>Contrat de vente signé</li>
+                                <li>Preuve de paiement</li>
+                            </ul>
+                        </div>
+
+                        <!-- Subscription Details -->
+                        <div class="info-section full-width-section">
+                            <h3><i class="fas fa-calendar-alt"></i> Détails de la souscription</h3>
+                            <div class="info-row">
+                                <span class="info-label">Date de souscription</span>
+                                <span class="info-value" id="subscriptionDate">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Statut du dossier</span>
+                                <span class="info-value" id="fileStatus">En cours</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Agent responsable</span>
+                                <span class="info-value" id="agent">Admin AGEF</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <a href="#" id="receiptBtn" class="btn-primary" onclick="generateReceipt(event)">
+                            <i class="fas fa-receipt"></i>
+                            Générer le reçu
+                        </a>
+                        <a href="#" class="btn-secondary" onclick="window.print()">
+                            <i class="fas fa-print"></i>
+                            Imprimer le profil
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/main.js"></script>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- AGEF Database (Cloud) -->
+    <script src="../js/database-supabase.js"></script>
+
+    <script>
+        // Load client data from URL parameter
+        async function loadClientData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const clientId = urlParams.get('client');
+
+            if (!clientId) {
+                alert('Client non trouvé');
+                window.location.href = 'admin-gestion-clients.html';
+                return;
+            }
+
+            const rawClient = await AGEFDatabase.getClientById(parseInt(clientId));
+            if (!rawClient) {
+                alert('Client non trouvé dans la base de données');
+                window.location.href = 'admin-gestion-clients.html';
+                return;
+            }
+
+            const client = AGEFDatabase.formatClient(rawClient);
+
+            // Update page content
+            document.getElementById('clientName').textContent = client.name;
+            document.getElementById('clientId').textContent = client.id;
+            document.getElementById('fullName').textContent = client.name;
+            document.getElementById('clientType').textContent = client.type;
+            document.getElementById('phone').textContent = client.phone;
+            document.getElementById('email').textContent = client.email;
+            document.getElementById('saleType').textContent = client.saleType;
+            document.getElementById('location').textContent = client.location;
+            document.getElementById('parcelRef').textContent = client.parcelRef;
+            document.getElementById('area').textContent = client.area;
+            document.getElementById('totalPrice').textContent = client.price;
+            document.getElementById('deposit').textContent = client.deposit;
+            document.getElementById('remaining').textContent = client.remaining;
+            document.getElementById('paymentMethod').textContent = client.paymentMethod;
+            document.getElementById('subscriptionDate').textContent = client.subscriptionDate;
+            document.getElementById('statusTitle').textContent = client.statusLabel;
+            document.getElementById('statusMessage').textContent = client.statusMessage;
+
+            // Update status banner color
+            const statusBanner = document.getElementById('statusBanner');
+            if (client.status === 'paid') {
+                statusBanner.classList.add('paid');
+            }
+
+            // Update receipt button link
+            const receiptBtn = document.getElementById('receiptBtn');
+            receiptBtn.href = `admin-recu-client.html?client=${clientId}`;
+        }
+
+        function generateReceipt(event) {
+            event.preventDefault();
+            const urlParams = new URLSearchParams(window.location.search);
+            const clientId = urlParams.get('client');
+            window.location.href = `admin-recu-client.html?client=${clientId}`;
+        }
+
+        function logout() {
+            if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Load data when page loads
+        window.addEventListener('load', loadClientData);
+    </script>
+</body>
+
+</html>
