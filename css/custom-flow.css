@@ -340,6 +340,8 @@
 
 /* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
+
+    /* Breadcrumbs */
     .step-label {
         font-size: 0.6rem;
         text-align: center;
@@ -354,45 +356,116 @@
     }
 
     .step-connector {
-        margin: 0 -10px 20px;
+        margin: 0 -5px 20px;
+        /* Tighter connectors */
         height: 2px;
     }
 
     .breadcrumb-step {
-        width: 60px;
+        width: 40px;
+        /* Narrower steps */
     }
 
     .flow-breadcrumbs {
         padding: 10px 0;
-        overflow-x: auto;
-        /* Allow scrolling if it still overflows */
-        justify-content: flex-start;
-        /* Align left if scrolling */
+        margin-bottom: 20px;
+        justify-content: center;
+        /* Center if possible */
     }
 
-    /* Ensure container doesn't overflow horizontally on very small screens */
+    /* Layout & Spacing */
     .container {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
-    /* Responsive Buttons */
+    h2 {
+        font-size: 1.5rem !important;
+        /* Smaller headings */
+    }
+
+    h3 {
+        font-size: 1.3rem !important;
+    }
+
+    h4 {
+        font-size: 1.1rem !important;
+    }
+
+    p,
+    .text-muted,
+    li {
+        font-size: 0.9rem !important;
+    }
+
+    .mb-5 {
+        margin-bottom: 1.5rem !important;
+    }
+
+    .mb-4 {
+        margin-bottom: 1rem !important;
+    }
+
+    /* Cards & Boxes */
+    .form-box,
+    .terms-box,
+    .summary-card,
+    .payment-select-container,
+    .location-info {
+        padding: 20px !important;
+        /* Reduced padding */
+    }
+
+    .location-img {
+        height: 150px;
+        /* Shorter images */
+    }
+
+    /* Forms */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control,
+    .form-select {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+
+    /* Summary Rows */
+    .summary-row {
+        padding: 10px 0;
+        flex-direction: column;
+        /* Stack label and value */
+        align-items: flex-start;
+    }
+
+    .summary-label {
+        margin-bottom: 2px;
+        font-size: 0.85rem;
+    }
+
+    .summary-value {
+        font-size: 1rem;
+    }
+
+    /* Buttons */
     .btn-next,
     .btn-back,
     .btn-success,
     .whatsapp-btn,
     .whatsapp-btn-green {
         font-size: 0.9rem !important;
-        padding: 10px 20px !important;
+        padding: 12px 20px !important;
         width: 100%;
-        /* Full width on mobile for better touch targets */
         margin-bottom: 10px;
+        display: block;
     }
 
     .flow-nav {
         flex-direction: column-reverse;
-        /* Stack buttons on mobile, back button at bottom */
         gap: 10px;
+        margin-top: 20px;
     }
 
     .btn-back {

@@ -77,16 +77,21 @@
             <div class="step-connector"></div>
             <div class="breadcrumb-step">
                 <div class="step-circle">4</div>
-                <div class="step-label">Lots</div>
+                <div class="step-label">Type</div>
             </div>
             <div class="step-connector"></div>
             <div class="breadcrumb-step">
                 <div class="step-circle">5</div>
-                <div class="step-label">Résumé</div>
+                <div class="step-label">Lots</div>
             </div>
             <div class="step-connector"></div>
             <div class="breadcrumb-step">
                 <div class="step-circle">6</div>
+                <div class="step-label">Résumé</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">7</div>
                 <div class="step-label">Paiement</div>
             </div>
         </div>
@@ -267,7 +272,7 @@
                     sessionStorage.setItem('agef_client_id', savedClient.id);
 
                     // Navigate to next page
-                    window.location.href = 'lots.html';
+                    window.location.href = 'type-selection.html';
 
                 } catch (error) {
                     console.error('❌ Error saving user:', error);

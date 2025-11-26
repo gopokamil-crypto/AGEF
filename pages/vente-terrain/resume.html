@@ -83,16 +83,21 @@
             <div class="step-connector completed"></div>
             <div class="breadcrumb-step completed">
                 <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-label">Type</div>
+            </div>
+            <div class="step-connector completed"></div>
+            <div class="breadcrumb-step completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
                 <div class="step-label">Lots</div>
             </div>
             <div class="step-connector completed"></div>
             <div class="breadcrumb-step active">
-                <div class="step-circle">5</div>
+                <div class="step-circle">6</div>
                 <div class="step-label">Résumé</div>
             </div>
             <div class="step-connector"></div>
             <div class="breadcrumb-step">
-                <div class="step-circle">6</div>
+                <div class="step-circle">7</div>
                 <div class="step-label">Paiement</div>
             </div>
         </div>
@@ -180,6 +185,18 @@
                         <span class="summary-value">Lot <span id="sumLotId"></span></span>
                     </div>
                     <div class="summary-row">
+                        <span class="summary-label">Ilot N°</span>
+                        <span class="summary-value" id="sumLotIlot"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Type</span>
+                        <span class="summary-value" id="sumLotType"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Position</span>
+                        <span class="summary-value" id="sumLotPosition"></span>
+                    </div>
+                    <div class="summary-row">
                         <span class="summary-label">Superficie</span>
                         <span class="summary-value"><span id="sumLotSize"></span> m²</span>
                     </div>
@@ -230,6 +247,9 @@
 
         document.getElementById('sumLoc').textContent = sessionStorage.getItem('agef_location_name');
         document.getElementById('sumLotId').textContent = sessionStorage.getItem('agef_lot_id');
+        document.getElementById('sumLotIlot').textContent = sessionStorage.getItem('agef_lot_ilot') || '-';
+        document.getElementById('sumLotType').textContent = sessionStorage.getItem('agef_lot_type') || '-';
+        document.getElementById('sumLotPosition').textContent = sessionStorage.getItem('agef_lot_position') || '-';
         document.getElementById('sumLotSize').textContent = sessionStorage.getItem('agef_lot_size');
         document.getElementById('sumLotPrice').textContent = sessionStorage.getItem('agef_lot_price');
 

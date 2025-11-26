@@ -68,18 +68,23 @@
                 <div class="step-label">Identité</div>
             </div>
             <div class="step-connector completed"></div>
+            <div class="breadcrumb-step completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-label">Type</div>
+            </div>
+            <div class="step-connector completed"></div>
             <div class="breadcrumb-step active">
-                <div class="step-circle">4</div>
+                <div class="step-circle">5</div>
                 <div class="step-label">Lots</div>
             </div>
             <div class="step-connector"></div>
             <div class="breadcrumb-step">
-                <div class="step-circle">5</div>
+                <div class="step-circle">6</div>
                 <div class="step-label">Résumé</div>
             </div>
             <div class="step-connector"></div>
             <div class="breadcrumb-step">
-                <div class="step-circle">6</div>
+                <div class="step-circle">7</div>
                 <div class="step-label">Paiement</div>
             </div>
         </div>
@@ -89,7 +94,14 @@
             <div class="col-md-10">
                 <div class="text-center mb-5">
                     <h2 class="mb-3">Disponibilités à <span id="locationNameDisplay"></span></h2>
-                    <p class="text-muted">Sélectionnez un lot parmi les disponibilités ci-dessous.</p>
+                    <p class="text-muted mb-2">Sélectionnez un lot parmi les disponibilités ci-dessous.</p>
+                    <div
+                        style="background: #f0f9f1; display: inline-block; padding: 8px 20px; border-radius: 20px; margin-top: 10px;">
+                        <span style="color: #2B8E38; font-weight: 600; font-size: 0.95rem;">
+                            <i class="fas fa-tag" style="margin-right: 8px;"></i>
+                            <span id="parcelTypeLabel">Parcelles Habitation</span>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="row" id="lotsGrid">
@@ -97,7 +109,7 @@
                 </div>
 
                 <div class="flow-nav">
-                    <a href="identite.html" class="btn-back">Retour</a>
+                    <a href="type-selection.html" class="btn-back">Retour</a>
                     <!-- Next button hidden until selection -->
                 </div>
             </div>
@@ -111,43 +123,243 @@
         }
 
         const locationName = sessionStorage.getItem('agef_location_name') || 'Songon';
-        document.getElementById('locationNameDisplay').textContent = locationName;
+        const selectedParcelType = sessionStorage.getItem('agef_parcel_type') || 'Habitation';
 
-        // Mock Data for Lots
-        const lotsData = [
-            { id: '401', size: '500', price: '5 000 000' },
-            { id: '402', size: '600', price: '6 000 000' },
-            { id: '403', size: '500', price: '5 000 000' },
-            { id: '404', size: '400', price: '4 000 000' },
-            { id: '405', size: '800', price: '8 000 000' },
-            { id: '406', size: '500', price: '5 000 000' },
+        document.getElementById('locationNameDisplay').textContent = locationName;
+        document.getElementById('parcelTypeLabel').textContent = `Parcelles ${selectedParcelType}`;
+
+        // --- DATASET GENERATION ---
+
+        // 1. Explicit Lots from the Prompt (Updated IDs)
+        const explicitLots = [
+            // Songon Ayewahi (S)
+            { loc: 'Songon', id: 'S 401', ilot: '1', size: 335, price: 3752000, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Songon', id: 'S 415', ilot: '1', size: 405, price: 4596750, type: 'Habitation', pos: 'Angle', status: 'Dispo' },
+            { loc: 'Songon', id: 'S 428', ilot: '1', size: 450, price: 5152500, type: 'Commercial', pos: 'Standard', status: 'Réservé' },
+            { loc: 'Songon', id: 'S 432', ilot: '1', size: 502, price: 5722800, type: 'Habitation', pos: 'Bord de Route', status: 'Dispo' },
+            { loc: 'Songon', id: 'S 445', ilot: '2', size: 585, price: 6639750, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Songon', id: 'S 458', ilot: '2', size: 610, price: 6984500, type: 'Commercial', pos: 'Angle', status: 'Réservé' },
+            { loc: 'Songon', id: 'S 461', ilot: '2', size: 705, price: 7966500, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Songon', id: 'S 473', ilot: '3', size: 802, price: 9022500, type: 'Habitation', pos: 'Angle', status: 'Dispo' },
+            { loc: 'Songon', id: 'S 485', ilot: '3', size: 950, price: 10640000, type: 'Habitation', pos: 'Bord de Route', status: 'Dispo' },
+
+            // Route d'Anyama (A)
+            { loc: 'Anyama', id: 'A 403', ilot: '4', size: 338, price: 3278600, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Anyama', id: 'A 417', ilot: '4', size: 412, price: 4037600, type: 'Habitation', pos: 'Angle', status: 'Dispo' },
+            { loc: 'Anyama', id: 'A 421', ilot: '4', size: 455, price: 4527250, type: 'Habitation', pos: 'Standard', status: 'Réservé' },
+            { loc: 'Anyama', id: 'A 434', ilot: '5', size: 498, price: 4930200, type: 'Commercial', pos: 'Bord de Route', status: 'Dispo' },
+            { loc: 'Anyama', id: 'A 446', ilot: '5', size: 510, price: 5074500, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Anyama', id: 'A 450', ilot: '5', size: 608, price: 6080000, type: 'Habitation', pos: 'Angle', status: 'Dispo' },
+            { loc: 'Anyama', id: 'A 463', ilot: '6', size: 755, price: 7400000, type: 'Habitation', pos: 'Bord de Route', status: 'Réservé' },
+            { loc: 'Anyama', id: 'A 474', ilot: '6', size: 802, price: 7819500, type: 'Commercial', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Anyama', id: 'A 485', ilot: '6', size: 920, price: 8924000, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+
+            // Yamoussoukro (Y)
+            { loc: 'Yamoussoukro', id: 'Y 402', ilot: '7', size: 332, price: 2656000, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Yamoussoukro', id: 'Y 415', ilot: '7', size: 408, price: 3304800, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Yamoussoukro', id: 'Y 428', ilot: '7', size: 455, price: 3713250, type: 'Commercial', pos: 'Angle', status: 'Réservé' },
+            { loc: 'Yamoussoukro', id: 'Y 432', ilot: '8', size: 492, price: 4034400, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Yamoussoukro', id: 'Y 445', ilot: '8', size: 515, price: 4248750, type: 'Habitation', pos: 'Bord de Route', status: 'Dispo' },
+            { loc: 'Yamoussoukro', id: 'Y 458', ilot: '8', size: 602, price: 4996600, type: 'Commercial', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Yamoussoukro', id: 'Y 461', ilot: '9', size: 705, price: 5781000, type: 'Habitation', pos: 'Angle', status: 'Dispo' },
+            { loc: 'Yamoussoukro', id: 'Y 474', ilot: '9', size: 810, price: 6601500, type: 'Habitation', pos: 'Standard', status: 'Réservé' },
+            { loc: 'Yamoussoukro', id: 'Y 487', ilot: '10', size: 880, price: 7128000, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Yamoussoukro', id: 'Y 498', ilot: '10', size: 975, price: 7848750, type: 'Commercial', pos: 'Bord de Route', status: 'Dispo' },
+
+            // Bouaké (B)
+            { loc: 'Bouaké', id: 'B 401', ilot: '11', size: 335, price: 2278000, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Bouaké', id: 'B 414', ilot: '11', size: 410, price: 2849500, type: 'Habitation', pos: 'Angle', status: 'Réservé' },
+            { loc: 'Bouaké', id: 'B 428', ilot: '11', size: 452, price: 3164000, type: 'Commercial', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Bouaké', id: 'B 431', ilot: '12', size: 495, price: 3489750, type: 'Habitation', pos: 'Bord de Route', status: 'Dispo' },
+            { loc: 'Bouaké', id: 'B 444', ilot: '12', size: 512, price: 3635200, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Bouaké', id: 'B 457', ilot: '12', size: 608, price: 4347200, type: 'Commercial', pos: 'Angle', status: 'Réservé' },
+            { loc: 'Bouaké', id: 'B 460', ilot: '13', size: 702, price: 4914000, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Bouaké', id: 'B 472', ilot: '13', size: 790, price: 5609000, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Bouaké', id: 'B 484', ilot: '13', size: 885, price: 6372000, type: 'Commercial', pos: 'Bord de Route', status: 'Dispo' },
+            { loc: 'Bouaké', id: 'B 495', ilot: '13', size: 910, price: 6506500, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+
+            // Korhogo (K)
+            { loc: 'Korhogo', id: 'K 401', ilot: '14', size: 408, price: 2244000, type: 'Habitation', pos: 'Standard', status: 'Réservé' },
+            { loc: 'Korhogo', id: 'K 414', ilot: '14', size: 455, price: 2548000, type: 'Habitation', pos: 'Angle', status: 'Dispo' },
+            { loc: 'Korhogo', id: 'K 427', ilot: '14', size: 505, price: 2878500, type: 'Commercial', pos: 'Bord de Route', status: 'Dispo' },
+            { loc: 'Korhogo', id: 'K 430', ilot: '14', size: 588, price: 3381000, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Korhogo', id: 'K 442', ilot: '15', size: 612, price: 3519000, type: 'Habitation', pos: 'Angle', status: 'Dispo' },
+            { loc: 'Korhogo', id: 'K 455', ilot: '15', size: 705, price: 3948000, type: 'Commercial', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Korhogo', id: 'K 468', ilot: '15', size: 802, price: 4571400, type: 'Habitation', pos: 'Bord de Route', status: 'Dispo' },
+            { loc: 'Korhogo', id: 'K 480', ilot: '15', size: 855, price: 4959000, type: 'Habitation', pos: 'Standard', status: 'Réservé' },
+            { loc: 'Korhogo', id: 'K 492', ilot: '15', size: 905, price: 4977500, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Korhogo', id: 'K 499', ilot: '15', size: 980, price: 5488000, type: 'Commercial', pos: 'Angle', status: 'Dispo' },
+
+            // Abengourou (A) - Using A as well
+            { loc: 'Abengourou', id: 'A 401', ilot: '16', size: 330, price: 1551000, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Abengourou', id: 'A 414', ilot: '16', size: 385, price: 1828750, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Abengourou', id: 'A 427', ilot: '16', size: 415, price: 1992000, type: 'Commercial', pos: 'Bord de Route', status: 'Réservé' },
+            { loc: 'Abengourou', id: 'A 430', ilot: '16', size: 480, price: 2352000, type: 'Habitation', pos: 'Angle', status: 'Dispo' },
+            { loc: 'Abengourou', id: 'A 442', ilot: '16', size: 505, price: 2499750, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Abengourou', id: 'A 454', ilot: '16', size: 608, price: 2918400, type: 'Commercial', pos: 'Angle', status: 'Dispo' },
+            { loc: 'Abengourou', id: 'A 466', ilot: '16', size: 710, price: 3372500, type: 'Habitation', pos: 'Bord de Route', status: 'Dispo' },
+            { loc: 'Abengourou', id: 'A 478', ilot: '16', size: 802, price: 3929800, type: 'Habitation', pos: 'Standard', status: 'Réservé' },
+            { loc: 'Abengourou', id: 'A 489', ilot: '16', size: 905, price: 4389250, type: 'Habitation', pos: 'Standard', status: 'Dispo' },
+            { loc: 'Abengourou', id: 'A 495', ilot: '16', size: 930, price: 4557000, type: 'Commercial', pos: 'Angle', status: 'Dispo' },
         ];
+
+        // 2. Configuration for Generation
+        const locationConfigs = {
+            'Songon': { target: 25, ilots: ['1', '2', '3'], priceRange: [11200, 11450], sizeRange: [300, 1000] },
+            'Anyama': { target: 25, ilots: ['4', '5', '6'], priceRange: [9700, 10000], sizeRange: [300, 1000] },
+            'Yamoussoukro': { target: 28, ilots: ['7', '8', '9', '10'], priceRange: [8000, 8300], sizeRange: [300, 1000] },
+            'Bouaké': { target: 25, ilots: ['11', '12', '13'], priceRange: [6800, 7200], sizeRange: [300, 1000] },
+            'Korhogo': { target: 24, ilots: ['14', '15'], priceRange: [5500, 5800], sizeRange: [400, 1000] },
+            'Abengourou': { target: 20, ilots: ['16'], priceRange: [4700, 5000], sizeRange: [300, 1000] }
+        };
+
+        // 3. Generator Function
+        function generateLots() {
+            let allLots = [...explicitLots];
+            const types = ['Habitation', 'Commercial'];
+            const positions = ['Standard', 'Angle', 'Bord de Route'];
+
+            for (const [loc, config] of Object.entries(locationConfigs)) {
+                const existing = allLots.filter(l => l.loc === loc);
+                // Extract numbers from existing IDs to avoid duplicates
+                const existingIds = new Set(existing.map(l => parseInt(l.id.split(' ')[1])));
+
+                let needed = config.target - existing.length;
+
+                // Get first letter
+                const firstLetter = loc.charAt(0).toUpperCase();
+
+                while (needed > 0) {
+                    // Generate random number between 400 and 500
+                    let randNum;
+                    do {
+                        randNum = Math.floor(Math.random() * (500 - 400 + 1)) + 400;
+                    } while (existingIds.has(randNum));
+
+                    const size = Math.floor(Math.random() * (config.sizeRange[1] - config.sizeRange[0] + 1)) + config.sizeRange[0];
+                    const pricePerM2 = Math.floor(Math.random() * (config.priceRange[1] - config.priceRange[0] + 1)) + config.priceRange[0];
+                    const price = size * pricePerM2;
+
+                    // Format ID: Letter + Space + Number
+                    const idStr = `${firstLetter} ${randNum}`;
+
+                    const newLot = {
+                        loc: loc,
+                        id: idStr,
+                        ilot: config.ilots[Math.floor(Math.random() * config.ilots.length)],
+                        size: size,
+                        price: price,
+                        type: types[Math.floor(Math.random() * types.length)],
+                        pos: positions[Math.floor(Math.random() * positions.length)],
+                        status: 'Dispo' // Default generated lots to Dispo
+                    };
+
+                    allLots.push(newLot);
+                    existingIds.add(randNum);
+                    needed--;
+                }
+            }
+            return allLots;
+        }
+
+        const allLots = generateLots();
+
+        // --- RENDER LOGIC ---
 
         const lotsGrid = document.getElementById('lotsGrid');
 
-        lotsData.forEach(lot => {
+        // Filter by location, status (only Dispo), AND type
+        const filteredLots = allLots.filter(lot =>
+            lot.loc === locationName &&
+            lot.status === 'Dispo' &&
+            lot.type === selectedParcelType
+        );
+
+        // Sort by ID (numeric part)
+        filteredLots.sort((a, b) => {
+            const numA = parseInt(a.id.split(' ')[1]);
+            const numB = parseInt(b.id.split(' ')[1]);
+            return numA - numB;
+        });
+
+        filteredLots.forEach((lot, index) => {
             const col = document.createElement('div');
-            col.className = 'col-md-4 mb-4';
+            // Add a class to identify cards for the "Show More" logic
+            col.className = 'col-md-4 mb-4 lot-item-col';
+
+            // Initially hide items after index 4 (5th item) ONLY on mobile
+            // We'll handle the actual hiding via CSS/JS logic below, but let's set a data attribute
+            col.dataset.index = index;
+
+            // Format price with spaces
+            const formattedPrice = lot.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+            // We pass the entire lot object to the select function (serialized)
+            const lotString = JSON.stringify(lot).replace(/"/g, '&quot;');
+
             col.innerHTML = `
-                <div class="lot-card" onclick="selectLot('${lot.id}', '${lot.size}', '${lot.price}', this)">
+                <div class="lot-card" onclick="selectLot(this, ${lotString})">
                     <div class="lot-number"><i class="fas fa-map-signs" style="color: #2B8E38; margin-right: 5px;"></i> Lot ${lot.id}</div>
+                    
+                    <div class="mb-2 text-center">
+                        <div style="font-size: 0.9rem; color: #555; font-weight: 500;">
+                            Position : ${lot.pos}
+                        </div>
+                    </div>
+
                     <div class="lot-size"><i class="fas fa-ruler-combined" style="color: #666; margin-right: 5px;"></i> ${lot.size} m²</div>
-                    <div class="lot-price"><i class="fas fa-tag" style="color: #666; margin-right: 5px;"></i> ${lot.price} FCFA</div>
+                    <div class="lot-price" style="margin-top: 5px;">${formattedPrice} FCFA</div>
                     <div class="mt-3 btn btn-sm btn-outline-success">Sélectionner</div>
                 </div>
             `;
             lotsGrid.appendChild(col);
         });
 
-        async function selectLot(id, size, price, element) {
+        // --- MOBILE SHOW MORE LOGIC ---
+        const isMobile = window.innerWidth < 768;
+        if (isMobile && filteredLots.length > 5) {
+            const allCols = document.querySelectorAll('.lot-item-col');
+
+            // Hide items > 5
+            allCols.forEach((col, idx) => {
+                if (idx >= 5) {
+                    col.style.display = 'none';
+                }
+            });
+
+            // Create and append "Show All" button
+            const showMoreBtnContainer = document.createElement('div');
+            showMoreBtnContainer.className = 'col-12 text-center mt-3';
+            showMoreBtnContainer.innerHTML = `
+                <button id="showMoreBtn" class="btn btn-outline-success" style="border-radius: 20px; padding: 10px 30px;">
+                    Voir tout (${filteredLots.length} lots) <i class="fas fa-chevron-down ml-2"></i>
+                </button>
+            `;
+            lotsGrid.appendChild(showMoreBtnContainer);
+
+            // Add click event
+            document.getElementById('showMoreBtn').addEventListener('click', function () {
+                allCols.forEach(col => {
+                    col.style.display = 'block'; // Show all
+                });
+                this.parentElement.style.display = 'none'; // Hide button
+            });
+        }
+
+        async function selectLot(element, lotData) {
             // Visual selection
             document.querySelectorAll('.lot-card').forEach(card => card.classList.remove('selected'));
             element.classList.add('selected');
 
             // Save to sessionStorage
-            sessionStorage.setItem('agef_lot_id', id);
-            sessionStorage.setItem('agef_lot_size', size);
-            sessionStorage.setItem('agef_lot_price', price);
+            sessionStorage.setItem('agef_lot_id', lotData.id);
+            sessionStorage.setItem('agef_lot_size', lotData.size);
+            sessionStorage.setItem('agef_lot_price', lotData.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "));
+
+            // Save extra details
+            sessionStorage.setItem('agef_lot_ilot', lotData.ilot);
+            sessionStorage.setItem('agef_lot_type', lotData.type);
+            sessionStorage.setItem('agef_lot_position', lotData.pos);
 
             // Update database record with lot selection
             try {
@@ -155,8 +367,13 @@
                 if (clientId) {
                     console.log('💾 Updating client record with lot selection...');
                     await AGEFDatabase.updateClient(parseInt(clientId), {
-                        parcel_ref: `Lot ${id}`,
-                        parcel_area: `${size} m²`
+                        parcel_ref: `Lot ${lotData.id}`,
+                        parcel_area: `${lotData.size} m²`,
+                        // We can also save the extra details if the DB schema supports it, 
+                        // or just append to notes/ref if needed. For now, we stick to the requested fields.
+                        // But let's try to save them if we can, or maybe in a metadata field?
+                        // The prompt says "stockées en backend ou attachées à l'objet sélectionné".
+                        // We'll assume the standard fields for now.
                     });
                     console.log('✅ Lot selection saved');
                 } else {

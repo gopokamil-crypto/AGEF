@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souscription - Étape 4 : Type de Parcelle</title>
+
+    <!-- CSS Files -->
+    <link rel='stylesheet' href='../../css/bootstrap.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel='stylesheet' href='../../css/paroti-style.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../../css/custom-flow.css' type='text/css' media='all' />
+
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .header-simple {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .logo-img {
+            max-height: 60px;
+        }
+
+        /* Match location-card style from custom-flow.css */
+        .type-card {
+            background: white;
+            border-radius: 10px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            height: 100%;
+            border: 2px solid transparent;
+            max-width: 350px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .type-card-content {
+            padding: 30px 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: #2B8E38;
+        }
+
+        .type-card.selected {
+            border-color: #2B8E38;
+            background: #f0f9f1;
+        }
+
+        .type-icon {
+            font-size: 2rem;
+            /* Reduced size */
+            color: #2B8E38;
+            margin-bottom: 15px;
+        }
+
+        .type-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .type-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+
+        /* Match button style from localisation.html */
+        .btn-select-type {
+            width: 100%;
+            background-color: #2B8E38;
+            border: none;
+            padding: 10px;
+            font-weight: 600;
+            color: white;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+            text-align: center;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .btn-select-type:hover {
+            background-color: #218838;
+        }
+
+        .type-card-footer {
+            padding: 0 20px 25px 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Simple Header -->
+    <header class="header-simple">
+        <div class="container">
+            <div class="text-center">
+                <a href="../../index.html">
+                    <img src="../../images/logo.png" alt="AGEF" class="logo-img">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Breadcrumbs -->
+        <div class="flow-breadcrumbs">
+            <div class="breadcrumb-step completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-label">Localisation</div>
+            </div>
+            <div class="step-connector completed"></div>
+            <div class="breadcrumb-step completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-label">Conditions</div>
+            </div>
+            <div class="step-connector completed"></div>
+            <div class="breadcrumb-step completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-label">Identité</div>
+            </div>
+            <div class="step-connector completed"></div>
+            <div class="breadcrumb-step active">
+                <div class="step-circle">4</div>
+                <div class="step-label">Type</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">5</div>
+                <div class="step-label">Lots</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">6</div>
+                <div class="step-label">Résumé</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="breadcrumb-step">
+                <div class="step-circle">7</div>
+                <div class="step-label">Paiement</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="text-center mb-5">
+                    <h2 class="mb-3">Quel type de parcelle recherchez-vous ?</h2>
+                    <p class="text-muted">Sélectionnez le type de terrain qui correspond à votre projet.</p>
+                </div>
+
+                <div class="row justify-content-center">
+                    <!-- Habitation Card -->
+                    <div class="col-md-5 mb-4">
+                        <div class="type-card" onclick="selectType('Habitation')">
+                            <div class="type-card-content">
+                                <div class="type-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <div class="type-title">Habitation</div>
+                                <div class="type-description">
+                                    Terrain destiné à la construction de votre résidence personnelle ou d'un projet
+                                    résidentiel.
+                                </div>
+                            </div>
+                            <div class="type-card-footer">
+                                <button class="btn-select-type">Sélectionner</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Commercial Card -->
+                    <div class="col-md-5 mb-4">
+                        <div class="type-card" onclick="selectType('Commercial')">
+                            <div class="type-card-content">
+                                <div class="type-icon">
+                                    <i class="fas fa-store"></i>
+                                </div>
+                                <div class="type-title">Commercial</div>
+                                <div class="type-description">
+                                    Terrain adapté pour des activités commerciales, bureaux ou projets d'affaires.
+                                </div>
+                            </div>
+                            <div class="type-card-footer">
+                                <button class="btn-select-type">Sélectionner</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-nav">
+                    <a href="identite.html" class="btn-back">Retour</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check prev steps
+        if (!sessionStorage.getItem('agef_user_name')) {
+            // window.location.href = 'identite.html'; // Commented out for easier testing
+        }
+
+        function selectType(type) {
+            // Visual selection
+            document.querySelectorAll('.type-card').forEach(card => card.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+
+            // Save to sessionStorage
+            sessionStorage.setItem('agef_parcel_type', type);
+
+            // Redirect after a brief delay for visual feedback
+            setTimeout(() => {
+                window.location.href = 'lots.html';
+            }, 300);
+        }
+    </script>
+</body>
+
+</html>
