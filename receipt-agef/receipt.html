@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Récépissé d'Ouverture de Dossier</title>
+    <link rel="stylesheet" href="receipt.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="page">
+
+            <!-- Background Watermark -->
+            <div class="watermark">
+                <img src="watermark.png" alt="Watermark" class="watermark-img">
+            </div>
+
+            <!-- Content Wrapper -->
+            <div class="content-wrapper">
+
+                <!-- Header -->
+                <div class="header">
+                    <div class="header-left">
+                        MINISTERE DE LA CONSTRUCTION DU LOGEMENT ET DE L'URBANISME
+                        <div class="divider-text">------------</div>
+                        AGENCE DE GESTION FONCIERE
+                    </div>
+
+                    <!-- Logo Center -->
+                    <div class="header-center">
+                        <img src="logo-agef.png" alt="Logo AGEF" class="logo-agef">
+                    </div>
+
+                    <div class="header-right">
+                        <span class="uppercase">REPUBLIQUE DE CÔTE D'IVOIRE</span>
+                        <div class="divider-text">------------</div>
+                        <span class="motto">Union-Discipline-Travail</span>
+                        <div class="emblem-container">
+                            <img src="emblem.png" alt="Emblème" class="emblem">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Title Banner -->
+                <div class="title-banner">
+                    ATTESTATION D'OUVERTURE DE DOSSIER FONCIER
+                </div>
+
+                <!-- Sub Title -->
+                <div class="sub-title">
+                    <div class="sub-title-main">
+                        RÉCÉPISSÉ D'OUVERTURE DE DOSSIER D'ACQUISITION DE PARCELLE
+                    </div>
+                    <div class="sub-title-detail">
+                        <span class="dynamic-text"><b>[NUMERO_LOT]</b></span> À <b>[LOCATION]</b>
+                    </div>
+                </div>
+
+                <!-- Orange Divider Line -->
+                <div class="orange-divider"></div>
+
+                <!-- Data List -->
+                <div class="data-list">
+                    <div class="data-row">
+                        <span class="label">Nom :</span>
+                        <span>[NOM_COMPLET]</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="label">Téléphone :</span>
+                        <span>[TELEPHONE]</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="label">Montant Payé :</span>
+                        <span>[MONTANT_PAYE] FCFA</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="label">Motif du Paiement :</span>
+                        <span>Frais d'Ouverture de Dossier & Sécurisation Initiale</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="label">Mode de Paiement :</span>
+                        <span>[MODE_PAIEMENT]</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="label">Lot N° :</span>
+                        <span>[NUMERO_LOT]</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="label">Opération / Site :</span>
+                        <span>[SITE]</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="label">Superficie :</span>
+                        <span>[SUPERFICIE] m²</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="label">Statut du Dossier :</span>
+                        <span class="status-warning">OUVERT - EN ATTENTE DE RÉSERVATION (10%)</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="label">Prix total de la parcelle :</span>
+                        <span>[PRIX_TOTAL] FCFA</span>
+                    </div>
+                </div>
+
+                <!-- Legal / Acknowledgement Text -->
+                <div class="legal-text">
+                    Le présent récépissé atteste que [CIVILITE] <b>[NOM_COMPLET]</b> a versé la somme de
+                    <b>[MONTANT_PAYE] FCFA</b> au titre de frais d'ouverture et d'étude de dossier pour la demande
+                    d'acquisition de la parcelle n° <b>[NUMERO_LOT]</b> située à <b>[SITE]</b>. Ces frais couvrent
+                    uniquement le traitement administratif du dossier ; ils ne constituent ni acompte sur le prix de la
+                    parcelle, ni réservation, ni titre de propriété. Les conditions de réservation (acompte minimum de
+                    10 % et paiement du solde) sont précisées dans les conditions générales accessibles via le QR Code
+                    ci-dessous.
+                </div>
+
+                <!-- Footer -->
+                <div class="footer">
+                    <!-- QR Code -->
+                    <div class="qr-container">
+                        <img src="qr-code.png" alt="QR Code" class="qr-code">
+                    </div>
+
+                    <div class="qr-text">
+                        Scannez ce QR Code pour consulter les conditions générales de réservation de votre parcelle.
+                    </div>
+
+                    <div class="footer-warning">
+                        Ce document est un titre provisoire. Il atteste de l'ouverture du dossier et de la priorité sur
+                        le lot désigné.<br>
+                        Il ne remplace pas l'Attestation de Droit d'Usage (ADU) finale.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

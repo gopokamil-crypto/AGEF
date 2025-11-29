@@ -74,6 +74,7 @@
 
         .back-link:hover {
             color: #237a2f;
+            text-decoration: underline;
         }
 
         .profile-container {
@@ -118,14 +119,7 @@
             border-left-color: #2B8E38;
         }
 
-        .status-banner .icon {
-            font-size: 32px;
-            color: #F57C00;
-        }
-
-        .status-banner.paid .icon {
-            color: #2B8E38;
-        }
+        /* Icon removed */
 
         .status-banner .content h3 {
             margin: 0 0 5px 0;
@@ -308,25 +302,12 @@
     <div class="paroti-page-loading"></div>
 
     <div class="wrapper-page">
-        <!-- Admin Header -->
-        <header class="admin-header">
-            <div class="container">
-                <h1>AGEF - Administration</h1>
-                <nav class="admin-nav">
-                    <a href="admin-gestion-clients.html">Gestion des clients</a>
-                    <a href="../index.html">Tableau de bord</a>
-                    <a href="#" onclick="logout()">Déconnexion</a>
-                </nav>
-            </div>
-        </header>
-
         <!-- Main Content -->
-        <div id="page-content" style="background-color: #F8F9FA; min-height: calc(100vh - 80px); padding: 20px 15px;">
+        <div id="page-content" style="background-color: #F8F9FA; min-height: 100vh; padding: 20px 15px;">
             <div class="container">
-                <a href="admin-gestion-clients.html" class="back-link">
-                    <i class="fas fa-arrow-left"></i>
-                    Retour à la recherche
-                </a>
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <img src="../images/logo.png" alt="AGEF" style="max-height: 80px;">
+                </div>
 
                 <div class="profile-container">
                     <div class="profile-header">
@@ -336,7 +317,6 @@
 
                     <!-- Status Banner -->
                     <div id="statusBanner" class="status-banner">
-                        <i class="fas fa-exclamation-circle icon"></i>
                         <div class="content">
                             <h3 id="statusTitle">Paiement en attente</h3>
                             <p id="statusMessage">Le client n'a pas encore finalisé son paiement.</p>
@@ -347,7 +327,7 @@
                     <div class="info-grid">
                         <!-- Personal Information -->
                         <div class="info-section">
-                            <h3><i class="fas fa-user"></i> Informations personnelles</h3>
+                            <h3>Informations personnelles</h3>
                             <div class="info-row">
                                 <span class="info-label">Nom complet</span>
                                 <span class="info-value" id="fullName">-</span>
@@ -368,7 +348,7 @@
 
                         <!-- Parcel Information -->
                         <div class="info-section">
-                            <h3><i class="fas fa-map-marked-alt"></i> Informations parcelle</h3>
+                            <h3>Informations parcelle</h3>
                             <div class="info-row">
                                 <span class="info-label">Type de vente</span>
                                 <span class="info-value" id="saleType">-</span>
@@ -389,7 +369,7 @@
 
                         <!-- Payment Information -->
                         <div class="info-section">
-                            <h3><i class="fas fa-money-bill-wave"></i> Informations financières</h3>
+                            <h3>Informations financières</h3>
                             <div class="info-row">
                                 <span class="info-label">Prix total</span>
                                 <span class="info-value highlight" id="totalPrice">-</span>
@@ -410,7 +390,7 @@
 
                         <!-- Documents -->
                         <div class="info-section">
-                            <h3><i class="fas fa-file-alt"></i> Documents requis</h3>
+                            <h3>Documents requis</h3>
                             <ul class="document-list">
                                 <li>Acte notarié</li>
                                 <li>Certificat de conformité urbanistique</li>
@@ -422,7 +402,7 @@
 
                         <!-- Subscription Details -->
                         <div class="info-section full-width-section">
-                            <h3><i class="fas fa-calendar-alt"></i> Détails de la souscription</h3>
+                            <h3>Détails de la souscription</h3>
                             <div class="info-row">
                                 <span class="info-label">Date de souscription</span>
                                 <span class="info-value" id="subscriptionDate">-</span>
@@ -441,7 +421,6 @@
                     <!-- Action Buttons -->
                     <div class="action-buttons">
                         <button id="downloadPdfBtn" class="btn-primary" onclick="downloadClientPDF(event)">
-                            <i class="fas fa-download"></i>
                             Télécharger le reçu PDF
                         </button>
                     </div>
@@ -530,7 +509,7 @@
                 // Show loading state on button
                 const button = event.target.closest('button');
                 const originalHTML = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Génération en cours...';
+                button.innerHTML = 'Génération en cours...';
                 button.disabled = true;
 
                 console.log('🎯 Starting PDF generation from profile page');
@@ -554,7 +533,7 @@
                 if (event && event.target) {
                     const button = event.target.closest('button');
                     if (button) {
-                        button.innerHTML = '<i class="fas fa-download"></i> Télécharger le reçu PDF';
+                        button.innerHTML = 'Télécharger le reçu PDF';
                         button.disabled = false;
                     }
                 }

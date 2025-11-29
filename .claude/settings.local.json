@@ -14,7 +14,15 @@
       "Bash(claude mcp install:*)",
       "WebSearch",
       "Bash(claude mcp add playwright npx -- @playwright/mcp@latest)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(python3:*)",
+      "Bash(node test-real-download.js:*)",
+      "Bash(node server.js:*)",
+      "mcp__playwright__browser_run_code",
+      "Bash(open:*)",
+      "Bash(mdls:*)"
     ],
     "deny": [],
     "ask": []

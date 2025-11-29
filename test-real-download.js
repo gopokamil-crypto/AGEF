@@ -25,9 +25,10 @@ async function testRealDownload() {
         // Step 1: Navigate to admin page
         console.log('1️⃣  Navigating to admin page...');
         await page.goto('http://localhost:3000/pages/admin-gestion-clients.html', {
-            waitUntil: 'networkidle',
-            timeout: 30000
+            waitUntil: 'domcontentloaded',
+            timeout: 60000
         });
+        await page.waitForTimeout(3000); // Wait for dynamic content to load
         console.log('   ✓ Page loaded\n');
 
         await page.screenshot({ path: 'step1-page-loaded.png' });

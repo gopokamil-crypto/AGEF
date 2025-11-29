@@ -22,7 +22,7 @@
     <style>
         .admin-header {
             background-color: #2B8E38;
-            padding: 20px 0;
+            padding: 10px 0;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
@@ -32,11 +32,11 @@
             align-items: center;
         }
 
-        .admin-header h1 {
-            color: white;
-            margin: 0;
-            font-size: 24px;
-            font-weight: 700;
+        .admin-header .logo-link img {
+            max-height: 50px;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
         }
 
         .admin-nav {
@@ -70,42 +70,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .search-section h2 {
-            color: #144047;
-            margin-bottom: 30px;
-            font-size: 28px;
-        }
-
-        .success-link-banner {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border: 2px solid #2B8E38;
-            border-radius: 8px;
-            padding: 15px 20px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .success-link-banner .icon {
-            color: #2B8E38;
-            font-size: 20px;
-        }
-
-        .success-link-banner p {
-            margin: 0;
-            color: #144047;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .success-link-banner a {
-            color: #2B8E38;
-            font-weight: 600;
-            word-break: break-all;
-            text-decoration: underline;
-        }
-
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -116,6 +80,7 @@
         .form-group {
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .form-group label {
@@ -127,11 +92,14 @@
 
         .form-group input {
             padding: 12px 15px;
+            /* Removed padding for icon */
             border: 2px solid #EDEDED;
             border-radius: 5px;
             font-size: 15px;
             transition: border-color 0.3s;
         }
+
+        /* Icon styles removed */
 
         .form-group input:focus {
             outline: none;
@@ -178,10 +146,17 @@
             margin-bottom: 30px;
         }
 
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
         .results-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            min-width: 800px;
+            /* Ensure table doesn't squish too much */
         }
 
         .results-table thead {
@@ -196,6 +171,7 @@
             font-size: 13px;
             text-transform: uppercase;
             border-bottom: 2px solid #EDEDED;
+            white-space: nowrap;
         }
 
         .results-table td {
@@ -213,11 +189,6 @@
             color: #144047;
         }
 
-        .subscriber-type {
-            font-size: 13px;
-            color: #666666;
-        }
-
         .parcel-info {
             font-size: 14px;
             line-height: 1.6;
@@ -233,41 +204,8 @@
             color: #666666;
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .status-pending {
-            background-color: #FFF3E0;
-            color: #F57C00;
-        }
-
-        .status-paid {
-            background-color: #E8F5E9;
-            color: #2B8E38;
-        }
-
         .action-cell {
             text-align: center;
-        }
-
-        .token-info {
-            font-size: 13px;
-            color: #666666;
-            margin-bottom: 8px;
-        }
-
-        .days-input {
-            width: 60px;
-            padding: 4px 8px;
-            border: 1px solid #EDEDED;
-            border-radius: 3px;
-            text-align: center;
-            margin: 0 5px;
         }
 
         .generate-btn {
@@ -290,6 +228,17 @@
             box-shadow: 0 4px 8px rgba(43, 142, 56, 0.3);
         }
 
+        .generated-link-container {
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .generated-link-container a {
+            color: #2B8E38;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+
         .no-results {
             text-align: center;
             padding: 60px 20px;
@@ -302,28 +251,99 @@
             margin-bottom: 20px;
         }
 
+        /* Loading Spinner Styles */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s;
+            flex-direction: column;
+        }
+
+        .loading-overlay.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #2B8E38;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        .loading-text {
+            color: #2B8E38;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            color: white;
+            font-size: 20px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
         @media (max-width: 767px) {
             .form-row {
                 grid-template-columns: 1fr;
             }
 
             .admin-header .container {
-                flex-direction: column;
-                gap: 15px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .menu-toggle {
+                display: block;
             }
 
             .admin-nav {
-                flex-direction: column;
+                display: none;
                 width: 100%;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 15px;
+                padding-top: 15px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
             }
 
-            .results-table {
-                font-size: 13px;
+            .admin-nav.active {
+                display: flex;
             }
 
-            .results-table th,
-            .results-table td {
-                padding: 10px 8px;
+            .admin-nav a {
+                width: 100%;
+                text-align: center;
             }
         }
     </style>
@@ -332,12 +352,23 @@
 <body class="page-template-default page theme-paroti">
     <div class="paroti-page-loading"></div>
 
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <div class="loading-text">Chargement...</div>
+    </div>
+
     <div class="wrapper-page">
         <!-- Admin Header -->
         <header class="admin-header">
             <div class="container">
-                <h1>AGEF - Administration</h1>
-                <nav class="admin-nav">
+                <a href="../index.html" class="logo-link">
+                    <img src="../images/logo.png" alt="AGEF Logo">
+                </a>
+                <button class="menu-toggle" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="admin-nav" id="adminNav">
                     <a href="#" class="active">Gestion des clients</a>
                     <a href="../index.html">Tableau de bord</a>
                     <a href="#" onclick="logout()">Déconnexion</a>
@@ -351,18 +382,6 @@
                 <div class="main-page-content">
                     <!-- Search Section -->
                     <div class="search-section">
-                        <h2>Recherche de client</h2>
-
-                        <!-- Success Banner (hidden by default) -->
-                        <div id="successBanner" class="success-link-banner" style="display: none;">
-                            <i class="fas fa-check-circle icon"></i>
-                            <div>
-                                <p><strong>Lien généré avec succès (valide pour <span id="validDays"></span> jours)
-                                        :</strong></p>
-                                <p><a id="generatedLink" href="#" target="_blank"></a></p>
-                            </div>
-                        </div>
-
                         <form id="searchForm" onsubmit="searchClients(event)">
                             <div class="form-row">
                                 <div class="form-group">
@@ -379,7 +398,6 @@
                             </div>
 
                             <button type="submit" class="search-btn">
-                                <i class="fas fa-search"></i>
                                 Rechercher
                             </button>
                         </form>
@@ -389,21 +407,23 @@
                     <div id="resultsSection" class="results-section">
                         <h3>Résultats de la recherche</h3>
 
-                        <table class="results-table">
-                            <thead>
-                                <tr>
-                                    <th>Souscripteur</th>
-                                    <th>Téléphone</th>
-                                    <th>Parcelle</th>
-                                    <th>Prix</th>
-                                    <th>Statut</th>
-                                    <th style="text-align: center;">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="resultsBody">
-                                <!-- Results will be inserted here -->
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="results-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nom & Prénoms</th>
+                                        <th>Téléphone</th>
+                                        <th>Ville & Type</th>
+                                        <th>Montant Total</th>
+                                        <th>Montant Réservation</th>
+                                        <th style="text-align: center;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="resultsBody">
+                                    <!-- Results will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
 
                         <div id="noResults" class="no-results" style="display: none;">
                             <i class="fas fa-search"></i>
@@ -425,6 +445,11 @@
     <script src="../js/database-supabase.js"></script>
 
     <script>
+        function toggleMenu() {
+            const nav = document.getElementById('adminNav');
+            nav.classList.toggle('active');
+        }
+
         async function searchClients(event) {
             event.preventDefault();
 
@@ -436,13 +461,24 @@
                 return;
             }
 
-            // Search clients from database
-            const clients = await AGEFDatabase.searchClients(nameQuery, phoneQuery);
+            // Show loading spinner
+            document.getElementById('loadingOverlay').classList.add('visible');
 
-            // Format results for display
-            const formattedResults = clients.map(client => AGEFDatabase.formatClient(client));
+            try {
+                // Search clients from database
+                const clients = await AGEFDatabase.searchClients(nameQuery, phoneQuery);
 
-            displayResults(formattedResults);
+                // Format results for display
+                const formattedResults = clients.map(client => AGEFDatabase.formatClient(client));
+
+                displayResults(formattedResults);
+            } catch (error) {
+                console.error('Error searching clients:', error);
+                alert('Une erreur est survenue lors de la recherche.');
+            } finally {
+                // Hide loading spinner
+                document.getElementById('loadingOverlay').classList.remove('visible');
+            }
         }
 
         function displayResults(results) {
@@ -460,64 +496,82 @@
 
             noResults.style.display = 'none';
 
-            resultsBody.innerHTML = results.map(client => `
+            resultsBody.innerHTML = results.map(client => {
+                // Clean up location/type display
+                // formatClient returns "Vente de parcelles - Location" for saleType
+                // We want to avoid repetition.
+                // client.location contains "Location, Type" e.g. "Yamoussoukro, Habitation"
+                // Let's just use client.location which seems to have what we need.
+                // If saleType is "Vente de parcelles - Yamoussoukro", it's redundant if we show location.
+
+                return `
                 <tr>
                     <td>
                         <div class="subscriber-name">${client.name}</div>
-                        <div class="subscriber-type">${client.type}</div>
                     </td>
                     <td>${client.phone}</td>
                     <td>
                         <div class="parcel-info">
-                            ${client.saleType}<br>
                             ${client.location}
                         </div>
                     </td>
                     <td>
                         <div class="price-amount">${client.price}</div>
-                        <div class="price-deposit">Acompte: ${client.deposit}</div>
                     </td>
                     <td>
-                        <span class="status-badge ${client.status === 'pending' ? 'status-pending' : 'status-paid'}">
-                            ${client.statusLabel}
-                        </span>
+                        <div class="price-deposit">${client.deposit}</div>
                     </td>
-                    <td class="action-cell">
-                        <div class="token-info">Token manquant. Générez un lien.</div>
-                        <input type="number" class="days-input" value="15" min="1" max="365" id="days-${client.id}">
-                        <label for="days-${client.id}" style="font-size: 12px; color: #666;">jours</label>
-                        <br><br>
+                    <td class="action-cell" id="action-cell-${client.id}">
                         <button class="generate-btn" onclick="generateLink(${client.id})">
-                            <i class="fas fa-link"></i>
-                            Générer
+                            Generate
                         </button>
                     </td>
                 </tr>
-            `).join('');
+            `}).join('');
         }
 
         function generateLink(clientId) {
-            const days = document.getElementById(`days-${clientId}`).value;
-
-            // Generate a unique token (in production, this would come from backend)
+            // Generate a unique token
             const token = generateToken();
 
             // Generate the link
             const baseURL = window.location.origin + window.location.pathname.replace('admin-gestion-clients.html', '');
             const profileLink = `${baseURL}admin-profile-client.html?token=${token}&client=${clientId}`;
 
-            // Show success banner
-            const successBanner = document.getElementById('successBanner');
-            const validDaysSpan = document.getElementById('validDays');
-            const generatedLinkEl = document.getElementById('generatedLink');
+            // Replace button with link input and copy button
+            const actionCell = document.getElementById(`action-cell-${clientId}`);
+            actionCell.innerHTML = `
+                <div class="generated-link-container" style="display: flex; gap: 5px; align-items: center; justify-content: center; max-width: 350px; margin: 0 auto;">
+                    <input type="text" value="${profileLink}" readonly onclick="this.select()" style="font-size: 12px; padding: 6px; width: 100%; border: 1px solid #ddd; border-radius: 4px; color: #555;">
+                    <button onclick="copyToClipboard(this, '${profileLink}')" class="btn btn-sm btn-outline-success" style="padding: 4px 10px; font-size: 12px;" title="Copier le lien">
+                        Copier
+                    </button>
+                    <a href="${profileLink}" target="_blank" class="btn btn-sm btn-success" style="padding: 4px 10px; font-size: 12px;" title="Ouvrir">
+                        Ouvrir
+                    </a>
+                </div>
+            `;
+        }
 
-            validDaysSpan.textContent = days;
-            generatedLinkEl.textContent = profileLink;
-            generatedLinkEl.href = profileLink;
-            successBanner.style.display = 'flex';
-
-            // Scroll to top to show the banner
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function copyToClipboard(btn, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btn.textContent;
+                btn.textContent = 'Copié !';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                // Fallback for older browsers
+                const input = btn.previousElementSibling;
+                input.select();
+                document.execCommand('copy');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copié !';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
         }
 
         function generateToken() {
@@ -530,7 +584,7 @@
             }
         }
 
-        // Auto-search if there are URL parameters, otherwise load recent
+        // Auto-search if there are URL parameters
         window.addEventListener('load', function () {
             const urlParams = new URLSearchParams(window.location.search);
             const name = urlParams.get('name');
@@ -540,30 +594,8 @@
                 if (name) document.getElementById('clientName').value = name;
                 if (phone) document.getElementById('clientPhone').value = phone;
                 document.getElementById('searchForm').dispatchEvent(new Event('submit'));
-            } else {
-                // Load recent clients by default
-                loadRecentClients();
             }
         });
-
-        async function loadRecentClients() {
-            // Show loading state?
-            const resultsSection = document.getElementById('resultsSection');
-            const resultsBody = document.getElementById('resultsBody');
-
-            // Fetch all clients (limit to 50 in production if needed, but getAllClients fetches all)
-            // For better performance, we might want a getRecentClients(limit) method, but getAllClients is fine for now
-            const clients = await AGEFDatabase.getAllClients();
-
-            // Take top 20
-            const recentClients = clients.slice(0, 20);
-
-            if (recentClients.length > 0) {
-                document.querySelector('.results-section h3').textContent = 'Derniers inscrits';
-                const formattedResults = recentClients.map(client => AGEFDatabase.formatClient(client));
-                displayResults(formattedResults);
-            }
-        }
     </script>
 </body>
 
