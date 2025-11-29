@@ -139,6 +139,10 @@ function populateTemplate(templateHTML, clientData) {
     const totalPrice = clientData.price || clientData.priceNumeric || calculatePrice(surfaceArea);
     const formattedTotal = formatCurrency(totalPrice);
 
+    // Calculate 10% reservation amount
+    const reservationAmount = calculateReservationAmount(totalPrice);
+    const formattedReservation = formatCurrency(reservationAmount);
+
     // Get civility from gender (male -> M., female -> Mme)
     const civility = getCivility(clientData.gender);
 
@@ -167,6 +171,9 @@ function populateTemplate(templateHTML, clientData) {
 
         // Total price from database
         '[PRIX_TOTAL]': formattedTotal,
+
+        // 10% reservation amount
+        '[MONTANT_RESERVATION]': formattedReservation,
 
         // Civility (M. or Mme based on gender)
         '[CIVILITE]': civility
@@ -209,6 +216,13 @@ function parseSurface(areaStr) {
 
 function calculatePrice(area) {
     return parseInt(area) * 15000;
+}
+
+function calculateReservationAmount(totalPrice) {
+    // Calculate 10% of total price
+    const num = typeof totalPrice === 'string' ? parseFloat(totalPrice.replace(/[^\d]/g, '')) : totalPrice;
+    if (isNaN(num)) return 0;
+    return Math.round(num * 0.1);
 }
 
 function formatCurrency(amount) {
