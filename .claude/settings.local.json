@@ -22,7 +22,12 @@
       "Bash(node server.js:*)",
       "mcp__playwright__browser_run_code",
       "Bash(open:*)",
-      "Bash(mdls:*)"
+      "Bash(mdls:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__chrome-devtools__new_page",
+      "Bash(lsof:*)",
+      "mcp__playwright__browser_install",
+      "mcp__chrome-devtools__list_pages"
     ],
     "deny": [],
     "ask": []

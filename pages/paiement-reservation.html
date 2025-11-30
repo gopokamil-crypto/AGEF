@@ -365,52 +365,93 @@
         let timerInterval = null;
         let timeRemaining = 1200; // 20 minutes in seconds
 
-        const paymentData = {
-            orange: {
-                title: "Instructions Orange Money",
-                steps: [
-                    "Composez <strong>#144#</strong> sur votre téléphone",
-                    "Sélectionnez <strong>'Transfert d'argent'</strong>",
-                    "Entrez le numéro : <strong>07 07 88 99 00</strong> (M. Koné / AGEF)",
-                    `Entrez le montant : <strong><span id="amount-orange"></span> FCFA</strong>`,
-                    "Confirmez avec votre code secret",
-                    "Gardez le SMS de confirmation pour votre dossier"
-                ]
-            },
-            wave: {
-                title: "Instructions Wave",
-                steps: [
-                    "Ouvrez votre application <strong>Wave</strong>",
-                    "Sélectionnez <strong>'Envoyer'</strong>",
-                    "Entrez le numéro : <strong>05 05 11 22 33</strong> (AGEF Dépôt)",
-                    `Entrez le montant : <strong><span id="amount-wave"></span> FCFA</strong>`,
-                    "Confirmez le transfert",
-                    "Faites une capture d'écran du reçu"
-                ]
-            },
-            moov: {
-                title: "Instructions Moov Money",
-                steps: [
-                    "Composez <strong>*155#</strong> sur votre téléphone",
-                    "Sélectionnez <strong>'Transfert'</strong>",
-                    "Entrez le numéro : <strong>01 01 22 33 44</strong> (AGEF Moov)",
-                    `Entrez le montant : <strong><span id="amount-moov"></span> FCFA</strong>`,
-                    "Confirmez avec votre code secret",
-                    "Gardez le SMS de confirmation"
-                ]
-            },
-            mtn: {
-                title: "Instructions MTN Money",
-                steps: [
-                    "Composez <strong>*133#</strong> sur votre téléphone",
-                    "Sélectionnez <strong>'Transfert'</strong>",
-                    "Entrez le numéro : <strong>05 04 55 66 77</strong> (AGEF MTN)",
-                    `Entrez le montant : <strong><span id="amount-mtn"></span> FCFA</strong>`,
-                    "Confirmez avec votre code secret",
-                    "Gardez le SMS de confirmation"
-                ]
-            }
+        // Cached payment config (loaded from Supabase)
+        let cachedPaymentConfig = null;
+
+        // Default payment config (fallback)
+        const defaultPaymentConfig = {
+            orange: { number: '07 07 88 99 00', name: 'M. Kone / AGEF' },
+            wave: { number: '05 05 11 22 33', name: 'AGEF Depot' },
+            moov: { number: '01 01 22 33 44', name: 'AGEF Moov' },
+            mtn: { number: '05 04 55 66 77', name: 'AGEF MTN' }
         };
+
+        // Load payment config from Supabase (async)
+        async function loadPaymentConfig() {
+            try {
+                if (typeof AGEFDatabase !== 'undefined') {
+                    cachedPaymentConfig = await AGEFDatabase.getPaymentConfig();
+                    console.log('Payment config loaded from Supabase:', cachedPaymentConfig);
+                } else {
+                    console.log('AGEFDatabase not available, using defaults');
+                    cachedPaymentConfig = defaultPaymentConfig;
+                }
+            } catch (error) {
+                console.error('Error loading payment config:', error);
+                cachedPaymentConfig = defaultPaymentConfig;
+            }
+        }
+
+        // Get cached config or default
+        function getPaymentConfig() {
+            return cachedPaymentConfig || defaultPaymentConfig;
+        }
+
+        // Generate payment data dynamically from config
+        function getPaymentData() {
+            const config = getPaymentConfig();
+            return {
+                orange: {
+                    title: "Instructions Orange Money",
+                    steps: [
+                        "Composez <strong>#144#</strong> sur votre telephone",
+                        "Selectionnez <strong>'Transfert d'argent'</strong>",
+                        `Entrez le numero : <strong>${config.orange.number}</strong> (${config.orange.name})`,
+                        `Entrez le montant : <strong><span id="amount-orange"></span> FCFA</strong>`,
+                        "Confirmez avec votre code secret",
+                        "Gardez le SMS de confirmation pour votre dossier"
+                    ]
+                },
+                wave: {
+                    title: "Instructions Wave",
+                    steps: [
+                        "Ouvrez votre application <strong>Wave</strong>",
+                        "Selectionnez <strong>'Envoyer'</strong>",
+                        `Entrez le numero : <strong>${config.wave.number}</strong> (${config.wave.name})`,
+                        `Entrez le montant : <strong><span id="amount-wave"></span> FCFA</strong>`,
+                        "Confirmez le transfert",
+                        "Faites une capture d'ecran du recu"
+                    ]
+                },
+                moov: {
+                    title: "Instructions Moov Money",
+                    steps: [
+                        "Composez <strong>*155#</strong> sur votre telephone",
+                        "Selectionnez <strong>'Transfert'</strong>",
+                        `Entrez le numero : <strong>${config.moov.number}</strong> (${config.moov.name})`,
+                        `Entrez le montant : <strong><span id="amount-moov"></span> FCFA</strong>`,
+                        "Confirmez avec votre code secret",
+                        "Gardez le SMS de confirmation"
+                    ]
+                },
+                mtn: {
+                    title: "Instructions MTN Money",
+                    steps: [
+                        "Composez <strong>*133#</strong> sur votre telephone",
+                        "Selectionnez <strong>'Transfert'</strong>",
+                        `Entrez le numero : <strong>${config.mtn.number}</strong> (${config.mtn.name})`,
+                        `Entrez le montant : <strong><span id="amount-mtn"></span> FCFA</strong>`,
+                        "Confirmez avec votre code secret",
+                        "Gardez le SMS de confirmation"
+                    ]
+                }
+            };
+        }
+
+        // Load config on page load
+        window.addEventListener('load', async function () {
+            await loadPaymentConfig();
+        });
 
         // Open payment modal
         function openPaymentModal() {
@@ -431,6 +472,7 @@
 
         // Select payment method from modal
         function selectPaymentMethod(methodKey, methodName) {
+            const paymentData = getPaymentData();
             const data = paymentData[methodKey];
 
             // Update instruction title and content

@@ -318,6 +318,134 @@ const AGEFDatabase = {
             console.error('Error fetching stats:', error);
             return { totalClients: 0, message: 'Error fetching stats' };
         }
+    },
+
+    // =============================================
+    // PAYMENT CONFIGURATION METHODS
+    // =============================================
+
+    /**
+     * Default payment configuration
+     */
+    defaultPaymentConfig: {
+        orange: { number: '07 07 88 99 00', name: 'M. Kone / AGEF' },
+        wave: { number: '05 05 11 22 33', name: 'AGEF Depot' },
+        moov: { number: '01 01 22 33 44', name: 'AGEF Moov' },
+        mtn: { number: '05 04 55 66 77', name: 'AGEF MTN' }
+    },
+
+    /**
+     * Get payment configuration from database
+     * @returns {Promise<Object>} Payment config object
+     */
+    async getPaymentConfig() {
+        try {
+            const { data, error } = await supabaseClient
+                .from('payment_config')
+                .select('*')
+                .order('updated_at', { ascending: false });
+
+            if (error) {
+                console.error('Error fetching payment config:', error);
+                return this.defaultPaymentConfig;
+            }
+
+            if (!data || data.length === 0) {
+                console.log('No payment config found, using defaults');
+                return this.defaultPaymentConfig;
+            }
+
+            // Convert array to object format
+            const config = {};
+            data.forEach(item => {
+                config[item.method_key] = {
+                    number: item.phone_number,
+                    name: item.beneficiary_name
+                };
+            });
+
+            // Merge with defaults for any missing methods
+            return { ...this.defaultPaymentConfig, ...config };
+        } catch (error) {
+            console.error('Error in getPaymentConfig:', error);
+            return this.defaultPaymentConfig;
+        }
+    },
+
+    /**
+     * Save payment configuration for a specific method
+     * @param {string} methodKey - Payment method key (orange, wave, moov, mtn)
+     * @param {string} phoneNumber - Phone number for payment
+     * @param {string} beneficiaryName - Name of beneficiary
+     * @returns {Promise<boolean>} Success status
+     */
+    async savePaymentConfig(methodKey, phoneNumber, beneficiaryName) {
+        try {
+            // Check if config exists for this method
+            const { data: existing } = await supabaseClient
+                .from('payment_config')
+                .select('id')
+                .eq('method_key', methodKey)
+                .single();
+
+            if (existing) {
+                // Update existing record
+                const { error } = await supabaseClient
+                    .from('payment_config')
+                    .update({
+                        phone_number: phoneNumber,
+                        beneficiary_name: beneficiaryName,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('method_key', methodKey);
+
+                if (error) throw error;
+            } else {
+                // Insert new record
+                const { error } = await supabaseClient
+                    .from('payment_config')
+                    .insert([{
+                        method_key: methodKey,
+                        phone_number: phoneNumber,
+                        beneficiary_name: beneficiaryName
+                    }]);
+
+                if (error) throw error;
+            }
+
+            console.log(`✅ Payment config saved for ${methodKey}`);
+            return true;
+        } catch (error) {
+            console.error('Error saving payment config:', error);
+            return false;
+        }
+    },
+
+    /**
+     * Get a single payment method config
+     * @param {string} methodKey - Payment method key
+     * @returns {Promise<Object>} Config for the method
+     */
+    async getPaymentMethodConfig(methodKey) {
+        try {
+            const { data, error } = await supabaseClient
+                .from('payment_config')
+                .select('*')
+                .eq('method_key', methodKey)
+                .single();
+
+            if (error || !data) {
+                return this.defaultPaymentConfig[methodKey];
+            }
+
+            return {
+                number: data.phone_number,
+                name: data.beneficiary_name
+            };
+        } catch (error) {
+            console.error('Error fetching payment method config:', error);
+            return this.defaultPaymentConfig[methodKey];
+        }
     }
 };
 
