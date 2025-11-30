@@ -3,10 +3,23 @@
 .AppleDouble
 .LSOverride
 
-# PDFs (if you don't want to commit PDFs)
+# PDFs
 *.pdf
 
-# Node modules (if you add Node.js later)
+# Test files
+test-*.js
+test-*.sh
+test-*.pdf
+
+# Debug screenshots
+*-screenshot.png
+step*.png
+search-results.png
+
+# Temporary receipt files
+receipt-agef/temp-*.html
+
+# Node modules
 node_modules/
 
 # Environment variables
@@ -21,3 +34,6 @@ node_modules/
 *.tmp
 *.log
 .vercel
+
+# Downloads folder (generated files)
+downloads/
