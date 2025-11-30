@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="fr-FR" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Votre Dossier d'Acquisition - AGEF</title>
+
+    <!-- CSS Links -->
+    <link rel='stylesheet' href='../css/bootstrap.css' />
+    <link rel='stylesheet' href='../css/all.min.css' />
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap'
+        rel='stylesheet' />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #F8F9FA;
+            color: #144047;
+            line-height: 1.6;
+        }
+
+        .container-custom {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        /* Logo Section */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 15px;
+            margin-top: -10px;
+        }
+
+        .logo-section img {
+            max-height: 50px;
+        }
+
+        /* Bounce Animation */
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Success Message */
+        .success-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            animation: bounce 2s infinite;
+        }
+
+        .success-icon i {
+            font-size: 40px;
+            color: #FF8C00;
+        }
+
+        .success-section h1 {
+            font-size: 28px;
+            color: #144047;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .success-section p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #2B8E38;
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .download-btn:hover {
+            background-color: #237a2f;
+            box-shadow: 0 6px 16px rgba(43, 142, 56, 0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* Info Card */
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .info-card h2 {
+            font-size: 20px;
+            color: #144047;
+            margin-bottom: 20px;
+            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #2B8E38;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #EDEDED;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #666;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .info-value {
+            color: #144047;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .info-value.highlight {
+            color: #2B8E38;
+            font-size: 18px;
+        }
+
+        /* Important Note Box */
+        .note-box {
+            background: #FFF8F0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .note-box .note-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: #FF8C00;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .note-box p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .note-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Amount Display */
+        .amount-box {
+            background: #F0F7FF;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .amount-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            font-size: 15px;
+        }
+
+        .amount-row .label {
+            color: #666;
+        }
+
+        .amount-row .value {
+            color: #144047;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .amount-row.total {
+            border-top: 2px solid #2B8E38;
+            padding-top: 15px;
+            margin-top: 10px;
+        }
+
+        .amount-row.total .value {
+            color: #2B8E38;
+            font-size: 20px;
+        }
+
+        /* Payment CTA */
+        .payment-cta {
+            background: linear-gradient(135deg, #2B8E38 0%, #237a2f 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .payment-cta h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .payment-cta p {
+            margin-bottom: 20px;
+            font-size: 15px;
+            opacity: 0.95;
+        }
+
+        .payment-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            color: #2B8E38;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .payment-cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            color: #2B8E38;
+        }
+
+        /* Documents List */
+        .documents-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .documents-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #144047;
+            font-size: 14px;
+        }
+
+        .documents-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2B8E38;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 767px) {
+            .container-custom {
+                padding: 15px 10px;
+            }
+
+            .success-section {
+                padding: 30px 20px;
+            }
+
+            .success-section h1 {
+                font-size: 24px;
+            }
+
+            .success-section p {
+                font-size: 14px;
+            }
+
+            .info-card {
+                padding: 20px;
+            }
+
+            .info-card h2 {
+                font-size: 18px;
+            }
+
+            .info-row {
+                flex-direction: column;
+                gap: 5px;
+                padding: 10px 0;
+            }
+
+            .info-value {
+                text-align: left;
+            }
+
+            .note-box {
+                padding: 15px;
+            }
+
+            .note-box .note-title {
+                font-size: 14px;
+            }
+
+            .note-box p {
+                font-size: 13px;
+            }
+
+            .amount-box {
+                padding: 15px;
+            }
+
+            .amount-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .payment-cta {
+                padding: 25px 20px;
+            }
+
+            .payment-cta h3 {
+                font-size: 20px;
+            }
+
+            .payment-cta p {
+                font-size: 14px;
+            }
+
+            .download-btn,
+            .payment-cta-btn {
+                width: 100%;
+                justify-content: center;
+                font-size: 15px;
+            }
+        }
+    </style>
+
+    <!-- PDF Generation Script -->
+    <script src="../js/pdf-api-client.js"></script>
+</head>
+
+<body>
+    <div class="container-custom">
+        <!-- Logo -->
+        <div class="logo-section">
+            <img src="../images/logo.png" alt="AGEF">
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-section">
+            <div class="success-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17L4 12" stroke="#FF8C00" stroke-width="3" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+            <h1>Félicitations !</h1>
+            <p>Votre dossier d'acquisition de parcelle a été ouvert avec succès.</p>
+
+            <a href="#" class="download-btn" onclick="downloadClientPDF(event)">
+                Télécharger le récépissé
+            </a>
+        </div>
+
+        <!-- Transaction Details -->
+        <div class="info-card">
+            <h2>Détails de votre parcelle</h2>
+
+            <div class="info-row">
+                <span class="info-label">Nom complet</span>
+                <span class="info-value" id="fullName">-</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Téléphone</span>
+                <span class="info-value" id="phone">-</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Localisation</span>
+                <span class="info-value" id="location">-</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Référence du lot</span>
+                <span class="info-value" id="parcelRef">-</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Superficie</span>
+                <span class="info-value" id="area">-</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Prix total</span>
+                <span class="info-value highlight" id="totalPrice">-</span>
+            </div>
+
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed #ddd;">
+                <p style="color: #666; font-size: 14px; margin: 0;">
+                    <span
+                        style="display: inline-block; width: 10px; height: 10px; background: #2B8E38; border-radius: 50%; margin-right: 5px;"></span>
+                    Vous avez payé <strong>50 000 FCFA</strong> pour l'ouverture et l'étude de votre dossier.
+                    Votre dossier est maintenant en cours de traitement.
+                </p>
+            </div>
+        </div>
+
+        <!-- Documents to Obtain -->
+        <div class="info-card">
+            <h2>Sécurisation de votre propriété</h2>
+
+            <p style="color: #666; font-size: 14px; margin-bottom: 15px;">
+                Une fois la procédure terminée, vous recevrez les documents officiels qui <strong>confirment que le
+                    terrain est bien le vôtre</strong> et qui <strong>sécurisent définitivement votre
+                    investissement</strong> :
+            </p>
+
+            <ul class="documents-list">
+                <li>Attestation de Droit d'Usage (ADU)</li>
+                <li>Plan cadastral de votre parcelle</li>
+                <li>Certificat d'urbanisme</li>
+                <li>Arrêté de Concession Définitive</li>
+            </ul>
+
+            <div class="note-box" style="margin-top: 20px;">
+                <div class="note-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="margin-right: 8px;">
+                        <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                            stroke="#FF8C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 16V12" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M12 8H12.01" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    Prochaine étape
+                </div>
+                <p>
+                    Pour réserver définitivement votre parcelle et démarrer la procédure d'obtention de vos documents,
+                    vous devez effectuer le paiement de la réservation.
+                </p>
+            </div>
+        </div>
+
+        <!-- Amount to Pay -->
+        <div class="amount-box">
+            <div class="amount-row">
+                <span class="label">Prix de la parcelle :</span>
+                <span class="value" id="priceDisplay">-</span>
+            </div>
+
+            <div class="amount-row total">
+                <span class="label">Montant de réservation à payer (10%) :</span>
+                <span class="value" id="reservationAmount">-</span>
+            </div>
+        </div>
+
+        <div class="note-box">
+            <div class="note-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    style="margin-right: 8px;">
+                    <path
+                        d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z"
+                        stroke="#FF8C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M16 2V6" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M8 2V6" stroke="#FF8C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3 10H21" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                Modalités de paiement
+            </div>
+            <p>
+                Après le paiement de la réservation (10%), le solde restant peut être réglé sur une période de
+                <strong>12 mois</strong> selon un échéancier personnalisé.
+            </p>
+        </div>
+
+        <!-- Payment CTA -->
+        <div class="payment-cta">
+            <h3>Réservez votre parcelle maintenant</h3>
+            <p>Cliquez ci-dessous pour procéder au paiement de la réservation.</p>
+            <a href="#" class="payment-cta-btn" id="paymentLink">
+                Procéder au paiement
+            </a>
+        </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../js/jquery.min.js"></script>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- AGEF Database (Cloud) -->
+    <script src="../js/database-supabase.js"></script>
+    <!-- PDF Generation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- PDF API client -->
+    <script src="../js/pdf-api-client.js"></script>
+
+    <script>
+        // Global variable to store current client
+        let currentClient = null;
+
+        // Load client data from URL parameter
+        async function loadClientData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const clientId = urlParams.get('client');
+
+            if (!clientId) {
+                alert('Client non trouvé');
+                window.location.href = '../index.html';
+                return;
+            }
+
+            const rawClient = await AGEFDatabase.getClientById(parseInt(clientId));
+            if (!rawClient) {
+                alert('Client non trouvé dans la base de données');
+                window.location.href = '../index.html';
+                return;
+            }
+
+            const client = AGEFDatabase.formatClient(rawClient);
+            currentClient = client;
+
+            // Update page content
+            document.getElementById('fullName').textContent = client.name;
+            document.getElementById('phone').textContent = client.phone;
+            document.getElementById('location').textContent = client.location;
+            document.getElementById('parcelRef').textContent = client.parcelRef;
+            document.getElementById('area').textContent = client.area;
+            document.getElementById('totalPrice').textContent = client.price;
+            document.getElementById('priceDisplay').textContent = client.price;
+
+            // Calculate and display 10% reservation amount
+            const reservationAmount = Math.round(client.priceNumeric * 0.10);
+            document.getElementById('reservationAmount').textContent =
+                new Intl.NumberFormat('fr-FR').format(reservationAmount) + ' FCFA';
+
+            // Update payment link to go to payment page with client data in session storage
+            const paymentLink = document.getElementById('paymentLink');
+            paymentLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                // Store client data in session storage for payment page
+                sessionStorage.setItem('reservationClientId', clientId);
+                sessionStorage.setItem('reservationAmount', reservationAmount);
+                sessionStorage.setItem('reservationClientData', JSON.stringify(client));
+                // Redirect to reservation payment page
+                window.location.href = 'paiement-reservation.html';
+            });
+        }
+
+        // Download PDF directly from profile page
+        async function downloadClientPDF(event) {
+            event.preventDefault();
+
+            try {
+                if (!currentClient) {
+                    alert('Les données du client ne sont pas encore chargées. Veuillez patienter.');
+                    return;
+                }
+
+                const button = event.target.closest('a');
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Génération...';
+                button.style.pointerEvents = 'none';
+
+                const success = await PDFAPIClient.generateReceipt(currentClient);
+
+                button.innerHTML = originalHTML;
+                button.style.pointerEvents = 'auto';
+
+                if (!success) {
+                    alert('Erreur lors de la génération du PDF. Veuillez réessayer.');
+                }
+
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors de la génération du PDF. Veuillez réessayer.');
+
+                if (event && event.target) {
+                    const button = event.target.closest('a');
+                    if (button) {
+                        button.innerHTML = '<i class="fas fa-download"></i> Télécharger le récépissé';
+                        button.style.pointerEvents = 'auto';
+                    }
+                }
+            }
+        }
+
+        // Load data when page loads
+        window.addEventListener('load', loadClientData);
+    </script>
+</body>
+
+</html>

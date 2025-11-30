@@ -175,9 +175,10 @@
         }
 
         .results-table td {
-            padding: 20px 15px;
+            padding: 12px 10px;
             border-bottom: 1px solid #EDEDED;
             color: #144047;
+            vertical-align: middle;
         }
 
         .results-table tbody tr:hover {
@@ -197,11 +198,17 @@
         .price-amount {
             font-weight: 600;
             color: #2B8E38;
+            font-size: 14px;
         }
 
         .price-deposit {
-            font-size: 13px;
+            font-size: 12px;
             color: #666666;
+            margin-top: 4px;
+        }
+
+        .price-column {
+            line-height: 1.4;
         }
 
         .action-cell {
@@ -237,6 +244,19 @@
             color: #2B8E38;
             text-decoration: underline;
             word-break: break-all;
+        }
+
+        .button-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .button-stack button,
+        .button-stack a {
+            width: 80px;
+            text-align: center;
         }
 
         .no-results {
@@ -314,6 +334,8 @@
         @media (max-width: 767px) {
             .form-row {
                 grid-template-columns: 1fr;
+                gap: 15px;
+                margin-bottom: 20px;
             }
 
             .admin-header .container {
@@ -344,6 +366,80 @@
             .admin-nav a {
                 width: 100%;
                 text-align: center;
+            }
+
+            .search-section {
+                padding: 20px;
+            }
+
+            .form-group label {
+                font-size: 13px;
+            }
+
+            .form-group input {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+
+            .search-btn {
+                width: 100%;
+                padding: 12px 20px;
+                font-size: 15px;
+                justify-content: center;
+            }
+
+            .results-section {
+                padding: 20px;
+            }
+
+            .results-table {
+                font-size: 12px;
+            }
+
+            .results-table th,
+            .results-table td {
+                padding: 8px 5px;
+                font-size: 11px;
+            }
+
+            .subscriber-name {
+                font-size: 12px;
+            }
+
+            .price-amount {
+                font-size: 12px;
+            }
+
+            .price-deposit {
+                font-size: 10px;
+            }
+
+            .generate-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .generated-link-container {
+                flex-direction: column !important;
+                max-width: 100% !important;
+            }
+
+            .generated-link-container input {
+                font-size: 10px !important;
+                padding: 4px !important;
+            }
+
+            .button-stack {
+                flex-direction: row !important;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .button-stack button,
+            .button-stack a {
+                font-size: 10px !important;
+                padding: 4px 6px !important;
+                width: 70px !important;
             }
         }
     </style>
@@ -413,9 +509,8 @@
                                     <tr>
                                         <th>Nom & Prénoms</th>
                                         <th>Téléphone</th>
-                                        <th>Ville & Type</th>
-                                        <th>Montant Total</th>
-                                        <th>Montant Réservation</th>
+                                        <th>Ville</th>
+                                        <th>Prix & Réservation</th>
                                         <th style="text-align: center;">Actions</th>
                                     </tr>
                                 </thead>
@@ -504,6 +599,9 @@
                 // Let's just use client.location which seems to have what we need.
                 // If saleType is "Vente de parcelles - Yamoussoukro", it's redundant if we show location.
 
+                // Extract just the city name from location (e.g., "Yamoussoukro, Habitation" -> "Yamoussoukro")
+                const cityName = client.location.split(',')[0].trim();
+
                 return `
                 <tr>
                     <td>
@@ -512,14 +610,14 @@
                     <td>${client.phone}</td>
                     <td>
                         <div class="parcel-info">
-                            ${client.location}
+                            ${cityName}
                         </div>
                     </td>
                     <td>
-                        <div class="price-amount">${client.price}</div>
-                    </td>
-                    <td>
-                        <div class="price-deposit">${client.deposit}</div>
+                        <div class="price-column">
+                            <div class="price-amount">${client.price}</div>
+                            <div class="price-deposit">Réserv: ${client.deposit}</div>
+                        </div>
                     </td>
                     <td class="action-cell" id="action-cell-${client.id}">
                         <button class="generate-btn" onclick="generateLink(${client.id})">
@@ -534,21 +632,24 @@
             // Generate a unique token
             const token = generateToken();
 
-            // Generate the link
-            const baseURL = window.location.origin + window.location.pathname.replace('admin-gestion-clients.html', '');
-            const profileLink = `${baseURL}admin-profile-client.html?token=${token}&client=${clientId}`;
+            // Generate a clean, professional link
+            // In a real app, this would be a rewritten URL like /dossier/123 or /dossier/uuid
+            const baseUrl = window.location.origin + window.location.pathname.replace('admin-gestion-clients.html', 'suivi-dossier.html');
+            const profileLink = `${baseUrl}?token=${token}&client=${clientId}`;
 
-            // Replace button with link input and copy button
+            // Replace button with link input and stacked copy/open buttons
             const actionCell = document.getElementById(`action-cell-${clientId}`);
             actionCell.innerHTML = `
-                <div class="generated-link-container" style="display: flex; gap: 5px; align-items: center; justify-content: center; max-width: 350px; margin: 0 auto;">
-                    <input type="text" value="${profileLink}" readonly onclick="this.select()" style="font-size: 12px; padding: 6px; width: 100%; border: 1px solid #ddd; border-radius: 4px; color: #555;">
-                    <button onclick="copyToClipboard(this, '${profileLink}')" class="btn btn-sm btn-outline-success" style="padding: 4px 10px; font-size: 12px;" title="Copier le lien">
-                        Copier
-                    </button>
-                    <a href="${profileLink}" target="_blank" class="btn btn-sm btn-success" style="padding: 4px 10px; font-size: 12px;" title="Ouvrir">
-                        Ouvrir
-                    </a>
+                <div class="generated-link-container" style="display: flex; gap: 8px; align-items: center; justify-content: center; max-width: 400px; margin: 0 auto;">
+                    <input type="text" value="${profileLink}" readonly onclick="this.select()" style="font-size: 11px; padding: 5px; width: 100%; border: 1px solid #ddd; border-radius: 4px; color: #555;">
+                    <div class="button-stack">
+                        <button onclick="copyToClipboard(this, '${profileLink}')" class="btn btn-sm btn-outline-success" style="padding: 4px 8px; font-size: 11px;" title="Copier le lien">
+                            Copier
+                        </button>
+                        <a href="${profileLink}" target="_blank" class="btn btn-sm" style="padding: 4px 8px; font-size: 11px; background-color: #2B8E38; color: white; border: none; text-decoration: none; display: inline-block; border-radius: 4px;" title="Ouvrir">
+                            Ouvrir
+                        </a>
+                    </div>
                 </div>
             `;
         }

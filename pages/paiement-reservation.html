@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement de Réservation - AGEF</title>
+
+    <!-- CSS Files -->
+    <link rel='stylesheet' href='../css/bootstrap.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel='stylesheet' href='../css/paroti-style.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='../css/custom-flow.css' type='text/css' media='all' />
+
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .header-simple {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .logo-img {
+            max-height: 60px;
+        }
+
+        /* Payment Page Styles */
+        .payment-select-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .form-select-lg {
+            font-size: 1.1rem;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            width: 100%;
+            background-color: #f8f9fa;
+        }
+
+        .payment-instructions-box {
+            border: 1px solid #2B8E38;
+            border-radius: 10px;
+            background-color: #fafffb;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .instructions-content {
+            padding: 25px;
+        }
+
+        .instruction-header {
+            color: #2B8E38;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .instruction-header i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .instruction-step {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .whatsapp-btn-green {
+            display: block;
+            width: 100%;
+            background-color: #25D366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-btn-green:hover {
+            background-color: #128C7E;
+            color: white;
+            text-decoration: none;
+        }
+
+        .important-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Mobile styles for floating timer */
+        @media (max-width: 768px) {
+            #floatingTimer {
+                top: 90px !important;
+                /* Position below header but above breadcrumbs */
+                right: 10px !important;
+                min-width: 140px !important;
+                padding: 10px 12px !important;
+                border-radius: 8px !important;
+            }
+
+            #floatingTimer>div:first-child {
+                font-size: 0.6rem !important;
+                margin-bottom: 3px !important;
+            }
+
+            #floatingTimer #timerDisplay {
+                font-size: 1.3rem !important;
+            }
+
+            #floatingTimer>div:last-child {
+                font-size: 0.6rem !important;
+                margin-top: 3px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Simple Header -->
+    <header class="header-simple">
+        <div class="container">
+            <div class="text-center">
+                <a href="../index.html">
+                    <img src="../images/logo.png" alt="AGEF" class="logo-img">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Main Content (NO BREADCRUMBS) -->
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                <p id="introText" class="text-center mb-4" style="font-size: 1.1rem; color: #333; font-weight: 500;">
+                    Sélectionnez votre moyen de paiement via TrésorPay - TrésorMoney pour finaliser le paiement de votre
+                    réservation.
+                </p>
+
+                <!-- Initial TresorPay Button (Step 1) -->
+                <div id="tresorpayButtonContainer">
+                    <div
+                        style="background: white; border-radius: 15px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); max-width: 500px; margin: 0 auto;">
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <h3 style="color: #2B8E38; margin-bottom: 10px;">
+                                <i class="fas fa-wallet"></i> Finaliser le paiement
+                            </h3>
+                            <p style="color: #666; font-size: 0.95rem;">
+                                Cliquez sur le bouton ci-dessous pour sélectionner votre moyen de paiement
+                            </p>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <button onclick="openPaymentModal()" style="background: linear-gradient(135deg, #2B8E38 0%, #237d30 100%); 
+                                       border: none; 
+                                       border-radius: 10px; 
+                                       padding: 20px 30px; 
+                                       cursor: pointer; 
+                                       box-shadow: 0 5px 15px rgba(43, 142, 56, 0.3);
+                                       transition: all 0.3s;
+                                       display: inline-flex;
+                                       align-items: center;
+                                       justify-content: center;"
+                                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(43, 142, 56, 0.4)'"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(43, 142, 56, 0.3)'">
+                                <img src="../../images/tresorpay.png" alt="TrésorPay"
+                                    style="max-width: 200px; width: 100%; height: auto; display: block;">
+                            </button>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 20px; color: #666; font-size: 0.85rem;">
+                            <i class="fas fa-shield-alt" style="color: #2B8E38;"></i> Paiement 100% sécurisé
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Instructions Container (Step 3 - Initially Hidden) -->
+                <div id="paymentInstructionsContainer" style="display: none;">
+                    <!-- Floating Timer Display (Top Right) -->
+                    <div id="floatingTimer" style="position: fixed; 
+                                top: 120px; 
+                                right: 20px; 
+                                z-index: 1000;
+                                background: linear-gradient(135deg, #fff3cd 0%, #ffe8a1 100%); 
+                                border: 2px solid #ffc107; 
+                                border-radius: 12px; 
+                                padding: 15px 20px;
+                                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                                min-width: 200px;
+                                text-align: center;">
+                        <div style="font-size: 0.75rem; color: #856404; margin-bottom: 5px; font-weight: 600;">
+                            <i class="fas fa-clock"></i> TEMPS RESTANT
+                        </div>
+                        <div id="timerDisplay"
+                            style="font-size: 1.8rem; font-weight: 700; color: #dc3545; font-family: 'Courier New', monospace;">
+                            20:00
+                        </div>
+                        <div style="font-size: 0.7rem; color: #856404; margin-top: 5px; line-height: 1.3;">
+                            Session expirée = Recommencer
+                        </div>
+                    </div>
+
+                    <div class="payment-select-container">
+                        <!-- Payment Method Display -->
+                        <div class="mb-3 text-center">
+                            <strong>Moyen de paiement sélectionné :</strong>
+                            <div id="selectedPaymentDisplay"
+                                style="font-size: 1.2rem; color: #2B8E38; font-weight: 700; margin-top: 10px; margin-bottom: 15px;">
+                                -
+                            </div>
+                            <button onclick="changePaymentMethod()"
+                                style="background: #f0f0f0; border: 1px solid #ddd; padding: 8px 20px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s;"
+                                onmouseover="this.style.background='#e0e0e0'"
+                                onmouseout="this.style.background='#f0f0f0'">
+                                <i class="fas fa-exchange-alt"></i> Changer de moyen de paiement
+                            </button>
+                        </div>
+
+                        <div class="payment-instructions-box">
+                            <div class="instructions-content">
+                                <div class="instruction-header">
+                                    <i class="fas fa-mobile-alt"></i> <span id="instructionTitle">Instructions</span>
+                                </div>
+
+                                <div id="dynamicInstructions">
+                                    <!-- Content will be injected here -->
+                                </div>
+
+                                <a href="#" onclick="sendProof()" class="whatsapp-btn-green">
+                                    <i class="fab fa-whatsapp"></i> Envoyer capture sur WhatsApp
+                                </a>
+
+                                <div class="important-note">
+                                    <strong>Important :</strong> Après avoir effectué le paiement, prenez une capture
+                                    d'écran du SMS de confirmation et envoyez-la via WhatsApp.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="suivi-dossier.html" class="text-muted" style="text-decoration: underline;">Retour
+                        aux détails</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Method Selection Modal -->
+        <div id="paymentModal"
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; overflow-y: auto;">
+            <div style="min-height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px;">
+                <div
+                    style="background: white; border-radius: 15px; max-width: 500px; width: 100%; padding: 30px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <button onclick="closePaymentModal()"
+                        style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #666;">
+                        <i class="fas fa-times"></i>
+                    </button>
+
+                    <h3 class="text-center mb-4" style="color: #2B8E38;">
+                        <i class="fas fa-wallet"></i> Choisissez votre moyen de paiement
+                    </h3>
+
+                    <div class="payment-methods-grid">
+                        <div class="payment-method-option" onclick="selectPaymentMethod('orange', 'Orange Money')">
+                            <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s;"
+                                onmouseover="this.style.borderColor='#2B8E38'; this.style.background='#f0f9f1'"
+                                onmouseout="this.style.borderColor='#ddd'; this.style.background='#f8f9fa'">
+                                <div
+                                    style="display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+                                    <img src="../../images/orange.png" alt="Orange Money"
+                                        style="width: 60px; height: 60px; object-fit: contain;">
+                                </div>
+                                <div style="font-weight: 600; font-size: 1.1rem;">Orange Money</div>
+                            </div>
+                        </div>
+
+                        <div class="payment-method-option mt-3" onclick="selectPaymentMethod('wave', 'Wave')">
+                            <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s;"
+                                onmouseover="this.style.borderColor='#2B8E38'; this.style.background='#f0f9f1'"
+                                onmouseout="this.style.borderColor='#ddd'; this.style.background='#f8f9fa'">
+                                <div
+                                    style="display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+                                    <img src="../../images/wave.jpg" alt="Wave"
+                                        style="width: 60px; height: 60px; object-fit: contain;">
+                                </div>
+                                <div style="font-weight: 600; font-size: 1.1rem;">Wave</div>
+                            </div>
+                        </div>
+
+                        <div class="payment-method-option mt-3" onclick="selectPaymentMethod('moov', 'Moov Money')">
+                            <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s;"
+                                onmouseover="this.style.borderColor='#2B8E38'; this.style.background='#f0f9f1'"
+                                onmouseout="this.style.borderColor='#ddd'; this.style.background='#f8f9fa'">
+                                <div
+                                    style="display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+                                    <img src="../../images/moov1.png" alt="Moov Money"
+                                        style="width: 60px; height: 60px; object-fit: contain;">
+                                </div>
+                                <div style="font-weight: 600; font-size: 1.1rem;">Moov Money</div>
+                            </div>
+                        </div>
+
+                        <div class="payment-method-option mt-3" onclick="selectPaymentMethod('mtn', 'MTN Money')">
+                            <div style="background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s;"
+                                onmouseover="this.style.borderColor='#2B8E38'; this.style.background='#f0f9f1'"
+                                onmouseout="this.style.borderColor='#ddd'; this.style.background='#f8f9fa'">
+                                <div
+                                    style="display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+                                    <img src="../../images/mtn.png" alt="MTN Money"
+                                        style="width: 60px; height: 60px; object-fit: contain;">
+                                </div>
+                                <div style="font-weight: 600; font-size: 1.1rem;">MTN Money</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- AGEF Database (Cloud) -->
+    <script src="../js/database-supabase.js"></script>
+
+    <script>
+        // Load reservation amount from session storage
+        let reservationAmount = 50000; // Default
+
+        window.addEventListener('load', function () {
+            const amount = sessionStorage.getItem('reservationAmount');
+            if (amount) {
+                reservationAmount = parseInt(amount);
+                console.log('💰 Reservation amount loaded:', reservationAmount, 'FCFA');
+            }
+        });
+
+        let timerInterval = null;
+        let timeRemaining = 1200; // 20 minutes in seconds
+
+        const paymentData = {
+            orange: {
+                title: "Instructions Orange Money",
+                steps: [
+                    "Composez <strong>#144#</strong> sur votre téléphone",
+                    "Sélectionnez <strong>'Transfert d'argent'</strong>",
+                    "Entrez le numéro : <strong>07 07 88 99 00</strong> (M. Koné / AGEF)",
+                    `Entrez le montant : <strong><span id="amount-orange"></span> FCFA</strong>`,
+                    "Confirmez avec votre code secret",
+                    "Gardez le SMS de confirmation pour votre dossier"
+                ]
+            },
+            wave: {
+                title: "Instructions Wave",
+                steps: [
+                    "Ouvrez votre application <strong>Wave</strong>",
+                    "Sélectionnez <strong>'Envoyer'</strong>",
+                    "Entrez le numéro : <strong>05 05 11 22 33</strong> (AGEF Dépôt)",
+                    `Entrez le montant : <strong><span id="amount-wave"></span> FCFA</strong>`,
+                    "Confirmez le transfert",
+                    "Faites une capture d'écran du reçu"
+                ]
+            },
+            moov: {
+                title: "Instructions Moov Money",
+                steps: [
+                    "Composez <strong>*155#</strong> sur votre téléphone",
+                    "Sélectionnez <strong>'Transfert'</strong>",
+                    "Entrez le numéro : <strong>01 01 22 33 44</strong> (AGEF Moov)",
+                    `Entrez le montant : <strong><span id="amount-moov"></span> FCFA</strong>`,
+                    "Confirmez avec votre code secret",
+                    "Gardez le SMS de confirmation"
+                ]
+            },
+            mtn: {
+                title: "Instructions MTN Money",
+                steps: [
+                    "Composez <strong>*133#</strong> sur votre téléphone",
+                    "Sélectionnez <strong>'Transfert'</strong>",
+                    "Entrez le numéro : <strong>05 04 55 66 77</strong> (AGEF MTN)",
+                    `Entrez le montant : <strong><span id="amount-mtn"></span> FCFA</strong>`,
+                    "Confirmez avec votre code secret",
+                    "Gardez le SMS de confirmation"
+                ]
+            }
+        };
+
+        // Open payment modal
+        function openPaymentModal() {
+            document.getElementById('paymentModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        // Close payment modal
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Change payment method (reopens modal without resetting timer)
+        function changePaymentMethod() {
+            openPaymentModal();
+        }
+
+        // Select payment method from modal
+        function selectPaymentMethod(methodKey, methodName) {
+            const data = paymentData[methodKey];
+
+            // Update instruction title and content
+            document.getElementById('instructionTitle').textContent = data.title;
+            document.getElementById('selectedPaymentDisplay').textContent = methodName;
+
+            // Format amount with thousand separator
+            const formattedAmount = new Intl.NumberFormat('fr-FR').format(reservationAmount);
+
+            const stepsHtml = data.steps.map(step => {
+                // Replace amount placeholders with actual amount
+                return `<div class="instruction-step">${step}</div>`;
+            }).join('');
+
+            document.getElementById('dynamicInstructions').innerHTML = stepsHtml;
+
+            // Update amount displays after DOM is updated
+            setTimeout(() => {
+                const amountId = `amount-${methodKey}`;
+                const amountElement = document.getElementById(amountId);
+                if (amountElement) {
+                    amountElement.textContent = formattedAmount;
+                }
+            }, 10);
+
+            // Hide modal, TresorPay button, and intro text
+            closePaymentModal();
+            document.getElementById('tresorpayButtonContainer').style.display = 'none';
+            document.getElementById('introText').style.display = 'none';
+
+            // Show payment instructions container
+            document.getElementById('paymentInstructionsContainer').style.display = 'block';
+
+            // Start the 20-minute timer ONLY if it hasn't been started yet
+            if (!timerInterval) {
+                startTimer();
+            }
+
+            // Store selected payment method
+            sessionStorage.setItem('agef_reservation_payment_method', methodName);
+        }
+
+        // Start 20-minute countdown timer
+        function startTimer() {
+            // Clear any existing timer
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+
+            timeRemaining = 1200; // Reset to 20 minutes
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    handleTimerExpired();
+                }
+            }, 1000);
+        }
+
+        // Update timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            const timerElement = document.getElementById('timerDisplay');
+            timerElement.textContent = display;
+
+            // Change color as time runs out
+            if (timeRemaining <= 300) { // Last 5 minutes
+                timerElement.style.color = '#dc3545'; // Red
+            } else if (timeRemaining <= 600) { // Last 10 minutes
+                timerElement.style.color = '#ff6b6b'; // Orange-red
+            }
+        }
+
+        // Handle timer expiration
+        function handleTimerExpired() {
+            // Clear session storage
+            sessionStorage.clear();
+
+            // Show expiration message
+            alert('⏰ Votre temps de paiement a expiré.\n\nVous devez recommencer le processus d\'acquisition depuis le début.\n\nMerci de votre compréhension.');
+
+            // Redirect to start of flow
+            window.location.href = '../vente-terrain.html';
+        }
+
+        async function sendProof() {
+            const clientData = sessionStorage.getItem('reservationClientData');
+            const paymentMethod = sessionStorage.getItem('agef_reservation_payment_method') || 'Non défini';
+            const agentNumber = '2250707889900';
+
+            let name = 'Client';
+            let location = 'Parcelle';
+
+            if (clientData) {
+                try {
+                    const client = JSON.parse(clientData);
+                    name = client.name || 'Client';
+                    location = client.location || 'Parcelle';
+                } catch (e) {
+                    console.error('Error parsing client data', e);
+                }
+            }
+
+            const message = `Bonjour, je suis ${name}. J'ai payé la réservation pour ${location}. Voici ma preuve :`;
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${agentNumber}?text=${encodedMessage}`;
+
+            // Stop the timer since payment proof is being sent
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+
+            // Update payment status in database
+            try {
+                const clientId = sessionStorage.getItem('reservationClientId');
+                if (clientId) {
+                    console.log('💾 Updating payment status...');
+                    await AGEFDatabase.updateClient(parseInt(clientId), {
+                        payment_method: paymentMethod,
+                        payment_status: 'partial' // Reservation paid
+                    });
+                    console.log('✅ Payment status updated');
+                }
+            } catch (error) {
+                console.error('❌ Error updating payment status:', error);
+            }
+
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, '_blank');
+
+            // Redirect to profile page
+            const clientId = sessionStorage.getItem('reservationClientId');
+            if (clientId) {
+                window.location.href = `suivi-dossier.html?client=${clientId}`;
+            } else {
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function (event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                closePaymentModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
